@@ -1,0 +1,2 @@
+# AutoMC
+Auto Minecraft
