@@ -4,4 +4,12 @@ package my.krbmod.automc.aisystem.actions.farming;
 //
 public class FarmingManager {
 
+	// TODO Setup FarmingManager Fields
+	private static int recipe = 0;
+
+	public static void init(){
+		// TODO Implement FarmingManager
+	}
+
+
 }

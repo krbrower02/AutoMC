@@ -1,5 +1,8 @@
 package my.krbmod.automc.aisystem.actions.actionhelpers;
-
+//
+// All the possible commands that the action helpers can be asked to implement from external sources
+// They can still do their own internal actions, but these are called from elsewhere.
+//
 public class ActionCommands {
 		
 	public static final String ACTION_NULL = "No Action";

@@ -1,7 +1,35 @@
 package my.krbmod.automc.aisystem.priorityqueue;
-//
-// queue to hold priority queue items  - this may not get implemented if PriorityQueueManager handles responsibility
-//
-public class PriorityQueue {
 
+//TODO - confirm whether java.util.List or java.awt.List should be used here.
+import java.util.List;
+import java.util.LinkedList;
+import java.util.ArrayList;
+
+//
+//All actions (other than inits) are managed through a priority queue.
+//Each action manager puts in a request at a certain priority based on perceived need
+//priority queue manager will authorize requests bases on priority levels
+//individual action managers can only perform tasks if there are no competing priorities
+//
+
+public class PriorityQueue {
+	private static List<PriorityQueueItem> priorityQueue;
+	
+	public static void init() {
+		// priorityQueue = new ArrayList<PriorityQueueItem>;
+	}
+	
+	public void add(){
+		
+	}
+	
+	public void remove(){
+		
+	}
+	
+	public PriorityQueueItem nextItem() {
+		PriorityQueueItem p = null;
+		
+		return p;
+	}
 }

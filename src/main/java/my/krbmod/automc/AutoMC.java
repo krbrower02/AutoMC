@@ -1,5 +1,6 @@
 package my.krbmod.automc;
 
+import my.krbmod.automc.aisystem.AISystem;
 import my.krbmod.automc.handler.ConfigurationHandler;
 import my.krbmod.automc.proxy.IProxy;
 import my.krbmod.automc.reference.Reference;
@@ -30,6 +31,11 @@ public class AutoMC {
 	    {
 			ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 			FMLCommonHandler.instance().bus().register(new ConfigurationHandler());
+			//
+			// Pre-Initialize the AI System
+			//
+			AISystem.preInit();
+			
 			LogHelper.info("Pre Initialization Complete");
 	    }
 	   
@@ -37,6 +43,11 @@ public class AutoMC {
 	   @EventHandler
 	   public void init(FMLInitializationEvent event)
 	   {
+			//
+			// Initialize the AI System
+			//
+			AISystem.Init();
+			
 			LogHelper.info("Initialization Complete");
 
 	   }
@@ -44,6 +55,11 @@ public class AutoMC {
 	   @EventHandler
 	   public void postInit(FMLPostInitializationEvent event)
 	   {
+			//
+			// Post-Initialize the AI System
+			//
+			AISystem.postInit();
+			
 			LogHelper.info("Post Initialization Complete");
 
 	   }

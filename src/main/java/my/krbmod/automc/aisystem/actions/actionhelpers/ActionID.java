@@ -1,5 +1,7 @@
 package my.krbmod.automc.aisystem.actions.actionhelpers;
-
+//
+// Counter for making unique action IDs used in Priority Queue
+//
 public class ActionID {
 
 	private static boolean actionInit = false;
@@ -15,7 +17,9 @@ public class ActionID {
 			actionInit = true;
 			actionID = 0;
 		}
-		
+		//
+		// TODO - Prevent or catch overflow of actionID
+		//
 		return actionID++;
 	}
 

@@ -1,5 +1,7 @@
 package my.krbmod.automc.aisystem.goals;
-
+//
+// Class to instantiate a Goal for use by the Goal Manager
+// 
 import my.krbmod.automc.aisystem.actions.actionhelpers.ActionCommands;
 import my.krbmod.automc.aisystem.actions.actionhelpers.ActionID;
 import my.krbmod.automc.aisystem.actions.actionhelpers.ActionStatus;
