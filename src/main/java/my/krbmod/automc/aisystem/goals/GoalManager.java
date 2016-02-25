@@ -1,7 +1,7 @@
 package my.krbmod.automc.aisystem.goals;
 
-import my.krbmod.automc.aisystem.actions.actionhelpers.ActionCommands;
-import my.krbmod.automc.aisystem.actions.actionhelpers.Actions;
+import my.krbmod.automc.aisystem.aihelpers.Actions;
+import my.krbmod.automc.aisystem.commandqueue.CommandItem;
 import my.krbmod.automc.utility.LogHelper;
 //
 //Goals are fed into the Priority Queue at a relatively low priority.
@@ -10,8 +10,10 @@ import my.krbmod.automc.utility.LogHelper;
 //
 public class GoalManager {
 private static Goal[] goalList = new Goal[] {
-		new Goal(Actions.LUMBERJACK, ActionCommands.ACTION_LUMBERJACK_CHOP, 10, 1),
-		new Goal(Actions.LUMBERJACK, ActionCommands.ACTION_LUMBERJACK_PRUNE, 10, 1)
+		// TODO - Determine if Goals Need to go by the Wayside...
+		//
+		//new Goal(Actions.LUMBERJACK, CommandItem.ACTION_LUMBERJACK_CHOP, 10, 1),
+		//new Goal(Actions.LUMBERJACK, CommandItem.ACTION_LUMBERJACK_PRUNE, 10, 1)
 	};
 
 

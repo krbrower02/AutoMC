@@ -1,18 +1,20 @@
 package my.krbmod.automc.aisystem;
 
-import my.krbmod.automc.aisystem.actions.crafting.CraftingManager;
-import my.krbmod.automc.aisystem.actions.crafting.RecipeManager;
-import my.krbmod.automc.aisystem.actions.farming.FarmingManager;
-import my.krbmod.automc.aisystem.actions.lumber.LumberManager;
-import my.krbmod.automc.aisystem.actions.mining.MiningManager;
-import my.krbmod.automc.aisystem.actions.terraforming.TerraformManager;
+import my.krbmod.automc.aisystem.actions.combat.CombatManager;
+import my.krbmod.automc.aisystem.actions.crafter.CraftingManager;
+import my.krbmod.automc.aisystem.actions.crafter.RecipeManager;
+import my.krbmod.automc.aisystem.actions.exploration.ExplorationManager;
+import my.krbmod.automc.aisystem.actions.farmer.FarmingManager;
+import my.krbmod.automc.aisystem.actions.inventory.InventoryManager;
+import my.krbmod.automc.aisystem.actions.lumberjack.LumberManager;
+import my.krbmod.automc.aisystem.actions.miner.MiningManager;
+import my.krbmod.automc.aisystem.actions.movement.AvoidanceManager;
+import my.krbmod.automc.aisystem.actions.movement.MovementManager;
+import my.krbmod.automc.aisystem.actions.movement.TrackingManager;
+import my.krbmod.automc.aisystem.actions.movement.waypoints.WaypointManager;
+import my.krbmod.automc.aisystem.actions.terraformer.TerraformManager;
+import my.krbmod.automc.aisystem.commandqueue.CommandQueue;
 import my.krbmod.automc.aisystem.goals.GoalManager;
-import my.krbmod.automc.aisystem.inventory.InventoryManager;
-import my.krbmod.automc.aisystem.movement.AvoidanceManager;
-import my.krbmod.automc.aisystem.movement.MovementManager;
-import my.krbmod.automc.aisystem.movement.TrackingManager;
-import my.krbmod.automc.aisystem.movement.waypoints.WaypointManager;
-import my.krbmod.automc.aisystem.priorityqueue.PriorityQueue;
 import my.krbmod.automc.aisystem.status.PlayerStatusMonitor;
 import my.krbmod.automc.utility.LogHelper;
 
@@ -42,23 +44,20 @@ public class AISystem {
 		// For now we will assume they all activate in Init.
 		//
 		PlayerStatusMonitor.init();
-		PriorityQueue.init();
+		CommandQueue.init();
 		GoalManager.init();
 		//
 		// Start with category order then we will reorder and move above this line as we implement dependencies
 		//
+		CombatManager.init();
 		CraftingManager.init();
-		RecipeManager.init();
+		ExplorationManager.init();
 		FarmingManager.init();
+		InventoryManager.init();
 		LumberManager.init();
 		MiningManager.init();
+		MovementManager.init();
 		TerraformManager.init();
-		InventoryManager.init();
-		WaypointManager.init();
-		AvoidanceManager.init();
-		MovementManager.init();
-		TrackingManager.init();
-		MovementManager.init();
 		
 		aiSystemState = AIReference.AI_STATE_IDLE;
 		

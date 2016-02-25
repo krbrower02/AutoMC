@@ -1,21 +1,18 @@
 package my.krbmod.automc.aisystem.goals;
-//
-// Class to instantiate a Goal for use by the Goal Manager
-// 
-import my.krbmod.automc.aisystem.actions.actionhelpers.ActionCommands;
-import my.krbmod.automc.aisystem.actions.actionhelpers.ActionID;
-import my.krbmod.automc.aisystem.actions.actionhelpers.ActionStatus;
-import my.krbmod.automc.aisystem.actions.actionhelpers.Actions;
+import my.krbmod.automc.aisystem.aihelpers.ActionID;
+import my.krbmod.automc.aisystem.aihelpers.CommandStatus;
+import my.krbmod.automc.aisystem.aihelpers.Actions;
+import my.krbmod.automc.aisystem.commandqueue.CommandItem;
 
 public class Goal {
 	Actions target;
 	String command;
 	int priority;
 	int repeat;	 
-	
+	// TODO - Determine if Goals need to go by the Wayside...
 	public Goal(){
-		target = Actions.STATUS;
-		command = ActionCommands.ACTION_NULL;
+		//target = Actions.STATUS;
+		//command = CommandItem.ACTION_NULL;
 		priority = 1;
 		repeat = 1;
 	}
