@@ -12,7 +12,7 @@ public class AIReference {
 	public static final String AI_STATE_MONITOR = "Monitor";
 	public static final String AI_STATE_UNKNOWN = "Unknown";
 			
-	public static final float FULL_HUNGER = (float) 10.0;  // Pork Chops
-	public static final float FULL_BASE_HEALTH = (float) 10.0; // Hearts
+	public static final float FULL_BASE_FOOD = (float) 10.0;  // Pork Chops
+	public static final float FULL_BASE_DAMAGE = (float) 10.0; // Hearts
 	public static final int FULL_BASE_ARMOR = 0; // ChestPlates
 }

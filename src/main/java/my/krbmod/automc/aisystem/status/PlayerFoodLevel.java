@@ -5,14 +5,14 @@ import my.krbmod.automc.aisystem.AIReference;
 //
 //Class to manage player's hunger level
 //
-public class PlayerHunger {
+public class PlayerFoodLevel {
 
-	float maxLevel= AIReference.FULL_HUNGER;
-	float currentLevel= AIReference.FULL_HUNGER;
+	float maxLevel= AIReference.FULL_BASE_FOOD;
+	float currentLevel= AIReference.FULL_BASE_FOOD;
 	
-	public PlayerHunger() {
-		maxLevel= AIReference.FULL_HUNGER;
-		currentLevel = AIReference.FULL_HUNGER;
+	public PlayerFoodLevel() {
+		maxLevel= AIReference.FULL_BASE_FOOD;
+		currentLevel = AIReference.FULL_BASE_FOOD;
 		
 	}
 	

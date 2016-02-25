@@ -5,12 +5,12 @@ import my.krbmod.automc.aisystem.AIReference;
 //
 //Class to manage base armor class and additional protections of player's armor 
 //
-public class ArmorClass {
+public class PlayerArmorLevel {
 
 	int maxLevel= AIReference.FULL_BASE_ARMOR;
 	int currentLevel= AIReference.FULL_BASE_ARMOR;
 	
-	public ArmorClass() {
+	public PlayerArmorLevel() {
 		maxLevel= AIReference.FULL_BASE_ARMOR;
 		currentLevel = AIReference.FULL_BASE_ARMOR;
 		

@@ -2,6 +2,9 @@ package my.krbmod.automc.aisystem.priorityqueue;
 
 //TODO - confirm whether java.util.List or java.awt.List should be used here.
 import java.util.List;
+
+import my.krbmod.automc.utility.LogHelper;
+
 import java.util.LinkedList;
 import java.util.ArrayList;
 
@@ -16,7 +19,10 @@ public class PriorityQueue {
 	private static List<PriorityQueueItem> priorityQueue;
 	
 	public static void init() {
+		LogHelper.info("Priority Queue Initialization Started");
+
 		// priorityQueue = new ArrayList<PriorityQueueItem>;
+		LogHelper.info("Priority Queue Initialization Complete");
 	}
 	
 	public void add(){

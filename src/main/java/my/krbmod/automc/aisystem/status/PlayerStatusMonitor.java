@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.ArrayList;
 
 import my.krbmod.automc.aisystem.aihelpers.MaterialLevel;
+import my.krbmod.automc.utility.LogHelper;
 
 //
 //Class to manage the current status of the player and to send alerts
@@ -12,23 +13,33 @@ import my.krbmod.automc.aisystem.aihelpers.MaterialLevel;
 public class PlayerStatusMonitor {
 
 	private static MaterialLevel materialLevel = MaterialLevel.WOOD;
-	private static PlayerHealth health;
-	private static PlayerHunger hunger;
+	private static PlayerDamageLevel health;
+	private static PlayerFoodLevel hunger;
 	private static ThreatLevel threat;
-	private static ArmorClass armorClass;
-	private static List<PlayerCondition> playerCondition; 
+	private static PlayerArmorLevel armorClass;
+	private static PlayerCondition playerCondition;
+	// TODO - Implement list of player conditions, for testing we just have one
+	//private static List<PlayerCondition> playerCondition; 
 
 public PlayerStatusMonitor() {
 	this.init();
 }
 
 public static void init() {
+	//
+	// TODO - For now we will assume only one init will be needed later we may need different Pre- and Post-Inits
+	//
+	LogHelper.info("Player Status Monitor Initialization Started");
 	materialLevel = MaterialLevel.WOOD;
-	health = new PlayerHealth();
-	hunger = new PlayerHunger();
+	health = new PlayerDamageLevel();
+	hunger = new PlayerFoodLevel();
 	threat = new ThreatLevel();
-	armorClass = new ArmorClass();
+	armorClass = new PlayerArmorLevel();
+	playerCondition = new PlayerCondition("Tired", "4:32");
+	LogHelper.info("Player Condition:"+playerCondition.toString());
 	// playerCondition = new ArrayList<PlayerCondition>;
+	LogHelper.info("Player Status Monitor Initialization Complete");
+	
 }
 
 public static MaterialLevel getMaterialLevel() {

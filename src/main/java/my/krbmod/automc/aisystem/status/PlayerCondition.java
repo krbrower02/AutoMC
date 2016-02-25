@@ -1,18 +1,25 @@
 package my.krbmod.automc.aisystem.status;
+
+import my.krbmod.automc.aisystem.aihelpers.TimeString;
+
 //
 //Class to manage timed conditions that have been added to player
 //
 public class PlayerCondition {
 	String condition; // condition name
-	int duration; // in seconds
+	TimeString duration; // in seconds
 	
 	public PlayerCondition() {
-		condition = "None";
-		duration = 0;
+		this("None", "00:00");
+	}
+	
+	public PlayerCondition(String c, String d) {
+		condition = c;
+		duration = new TimeString(d);
 	}
 	
 	public int getduration(){
-		return duration;
+		return duration.toSeconds();
 	}
 	
 	public String getcondition(){
@@ -20,22 +27,14 @@ public class PlayerCondition {
 	}
 
 	public void setDuration(int level){
-		duration = level;
+		duration = new TimeString(level);
 	}
 	
 	public void setCondition(String s){
 		condition = s;
 	}
 	
-	// Helper Classes
-	// TODO - search Java Library for these functions
-	public static int toSeconds(String time){
-		//TODO - Convert time string as "mm:ss" to integer time in seconds
-		return 0;
-	}
-	
-	public static String toTimeString(int s){
-		//TODO - Convert integer time in seconds to time string as "mm:ss"
-		return "00:00";
+	public String toString(){
+		return (String) "["+condition+" for "+duration.toString()+"("+duration.toSeconds()+") seconds ]";
 	}
 }

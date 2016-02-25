@@ -5,14 +5,14 @@ import my.krbmod.automc.aisystem.AIReference;
 //
 //Class to manage player's health: total, actual, regen rate, etc. 
 //
-public class PlayerHealth {
+public class PlayerDamageLevel {
 
-	float maxLevel= AIReference.FULL_BASE_HEALTH;
-	float currentLevel= AIReference.FULL_BASE_HEALTH;
+	float maxLevel= AIReference.FULL_BASE_FOOD;
+	float currentLevel= AIReference.FULL_BASE_FOOD;
 	
-	public PlayerHealth() {
-		maxLevel= AIReference.FULL_BASE_HEALTH;
-		currentLevel = AIReference.FULL_BASE_HEALTH;
+	public PlayerDamageLevel() {
+		maxLevel= AIReference.FULL_BASE_FOOD;
+		currentLevel = AIReference.FULL_BASE_FOOD;
 		
 	}
 	
