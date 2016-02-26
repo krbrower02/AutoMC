@@ -1,10 +1,8 @@
 package my.krbmod.automc.aisystem.actions.inventory;
 
 import java.util.ArrayList;
-
 import my.krbmod.automc.aisystem.actions.inventory.support.InventoryGoal;
 import my.krbmod.automc.aisystem.actions.inventory.support.InventoryGoals;
-import my.krbmod.automc.aisystem.aihelpers.ActionPriority;
 import my.krbmod.automc.aisystem.aihelpers.Actions;
 import my.krbmod.automc.aisystem.aihelpers.CombatStatus;
 import my.krbmod.automc.aisystem.aihelpers.MaterialLevel;
@@ -12,14 +10,18 @@ import my.krbmod.automc.aisystem.commandqueue.CommandItem;
 import my.krbmod.automc.aisystem.commandqueue.CommandQueue;
 import my.krbmod.automc.utility.LogHelper;
 
+//
+//Class to manage player and chest inventories
+//
 public class InventoryManager {
 
 	public static final Actions thisAction = Actions.INVENTORY;
+	public static String name = thisAction.getName();
+	public static int defaultPriority = thisAction.getPriority();
+	public static long defaultTimer = thisAction.getTimer();
 	public static ArrayList<InventoryGoal> inventoryGoalList = new ArrayList<InventoryGoal>();
 
-	public static long lastChecked = System.currentTimeMillis();
-	public static int defaultPriority = ActionPriority.PRIORITY_INVENTORY;
-	public static int defaultTimer = ActionPriority.TIMER_INVENTORY;
+	public static long lastChecked = 0;
 
 	// TODO Setup remaining Inventory Manager Fields
 	private static int inventory = 0;

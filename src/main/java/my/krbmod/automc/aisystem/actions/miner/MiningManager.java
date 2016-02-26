@@ -1,6 +1,5 @@
 package my.krbmod.automc.aisystem.actions.miner;
 
-import my.krbmod.automc.aisystem.aihelpers.ActionPriority;
 import my.krbmod.automc.aisystem.aihelpers.Actions;
 import my.krbmod.automc.aisystem.commandqueue.CommandQueue;
 import my.krbmod.automc.utility.LogHelper;
@@ -11,9 +10,11 @@ import my.krbmod.automc.utility.LogHelper;
 public class MiningManager {
 	
 	public static final Actions thisAction = Actions.MINER;
-	public static long lastChecked = System.currentTimeMillis();
-	public static int defaultPriority = ActionPriority.PRIORITY_MINER;
-	public static int defaultTimer = ActionPriority.TIMER_MINER;
+	public static String name = thisAction.getName();
+	public static int defaultPriority = thisAction.getPriority();
+	public static long defaultTimer = thisAction.getTimer();
+
+	public static long lastChecked = 0;
 
 	// TODO Setup remaining Mining Manager Fields
 	private static int recipe = 0;

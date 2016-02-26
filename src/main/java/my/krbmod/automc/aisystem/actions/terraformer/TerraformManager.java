@@ -1,6 +1,5 @@
 package my.krbmod.automc.aisystem.actions.terraformer;
 
-import my.krbmod.automc.aisystem.aihelpers.ActionPriority;
 import my.krbmod.automc.aisystem.aihelpers.Actions;
 import my.krbmod.automc.aisystem.commandqueue.CommandQueue;
 import my.krbmod.automc.utility.LogHelper;
@@ -11,10 +10,11 @@ import my.krbmod.automc.utility.LogHelper;
 public class TerraformManager {
 
 	public static final Actions thisAction = Actions.TERRAFORMER;
-	public static long lastChecked = 0;
-	public static int defaultPriority = ActionPriority.PRIORITY_TERRAFORMER;
-	public static int defaultTimer = ActionPriority.TIMER_TERRAFORMER;
+	public static String name = thisAction.getName();
+	public static int defaultPriority = thisAction.getPriority();
+	public static long defaultTimer = thisAction.getTimer();
 
+	public static long lastChecked = 0;
 
 	// TODO Setup remaining TerraformManager Fields
 	private static int terraform = 0;

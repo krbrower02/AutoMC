@@ -1,7 +1,6 @@
 package my.krbmod.automc.aisystem.actions.movement;
 
 import my.krbmod.automc.aisystem.actions.movement.waypoints.WaypointManager;
-import my.krbmod.automc.aisystem.aihelpers.ActionPriority;
 import my.krbmod.automc.aisystem.aihelpers.Actions;
 import my.krbmod.automc.aisystem.commandqueue.CommandQueue;
 import my.krbmod.automc.utility.LogHelper;
@@ -12,9 +11,11 @@ import my.krbmod.automc.utility.LogHelper;
 public class MovementManager {
 	
 	public static final Actions thisAction = Actions.MOVEMENT;
-	public static long lastChecked = System.currentTimeMillis();
-	public static int defaultPriority = ActionPriority.PRIORITY_MOVEMENT;
-	public static int defaultTimer = ActionPriority.TIMER_MOVEMENT;
+	public static String name = thisAction.getName();
+	public static int defaultPriority = thisAction.getPriority();
+	public static long defaultTimer = thisAction.getTimer();
+
+	public static long lastChecked = 0;
 		
 	// TODO Setup remaining Movement Manager Fields
 	private static int mmovement = 0;

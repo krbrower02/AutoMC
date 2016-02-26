@@ -1,6 +1,5 @@
 package my.krbmod.automc.aisystem.actions.lumberjack;
 
-import my.krbmod.automc.aisystem.aihelpers.ActionPriority;
 import my.krbmod.automc.aisystem.aihelpers.Actions;
 import my.krbmod.automc.aisystem.commandqueue.CommandQueue;
 import my.krbmod.automc.aisystem.commandqueue.CommandQueueItem;
@@ -12,9 +11,11 @@ import my.krbmod.automc.utility.LogHelper;
 public class LumberManager {
 	
 	public static final Actions thisAction = Actions.LUMBERJACK;
-	public static long lastChecked = System.currentTimeMillis();
-	public static int defaultPriority = ActionPriority.PRIORITY_LUMBERJACK;
-	public static int defaultTimer = ActionPriority.TIMER_LUMBERJACK;
+	public static String name = thisAction.getName();
+	public static int defaultPriority = thisAction.getPriority();
+	public static long defaultTimer = thisAction.getTimer();
+
+	public static long lastChecked = 0;
 
 	// TODO Setup remaining Lumber Manager Fields
 	private static int recipe = 0;

@@ -1,6 +1,5 @@
 package my.krbmod.automc.aisystem.actions.combat;
 
-import my.krbmod.automc.aisystem.aihelpers.ActionPriority;
 import my.krbmod.automc.aisystem.aihelpers.Actions;
 import my.krbmod.automc.aisystem.aihelpers.CombatStatus;
 import my.krbmod.automc.aisystem.commandqueue.CommandQueue;
@@ -12,12 +11,13 @@ import my.krbmod.automc.utility.LogHelper;
 
 public class CombatManager {
 
-	private static CombatStatus combatStatus;
 	public static final Actions thisAction = Actions.COMBAT;
-	public static long lastChecked = System.currentTimeMillis();
-	public static int defaultPriority = ActionPriority.PRIORITY_COMBAT;
-	public static int defaultTimer = ActionPriority.TIMER_COMBAT;
-
+	public static String name = thisAction.getName();
+	public static int defaultPriority = thisAction.getPriority();
+	public static long defaultTimer = thisAction.getTimer();
+	private static CombatStatus combatStatus;
+	public static long lastChecked = 0;
+	
 
 	// TODO Setup remaining Combat Manager Fields
 
