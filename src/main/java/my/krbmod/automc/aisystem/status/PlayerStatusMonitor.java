@@ -12,7 +12,7 @@ import my.krbmod.automc.utility.LogHelper;
 //
 public class PlayerStatusMonitor {
 
-	private static MaterialLevel materialLevel = MaterialLevel.WOOD;
+	private static MaterialLevel materialLevel = MaterialLevel.BAREHAND;
 	private static PlayerDamageLevel health;
 	private static PlayerFoodLevel hunger;
 	private static ThreatLevel threat;
@@ -30,7 +30,7 @@ public static void init() {
 	// TODO - For now we will assume only one init will be needed later we may need different Pre- and Post-Inits
 	//
 	LogHelper.info("Player Status Monitor Initialization Started");
-	materialLevel = MaterialLevel.WOOD;
+	materialLevel = MaterialLevel.BAREHAND;
 	health = new PlayerDamageLevel();
 	hunger = new PlayerFoodLevel();
 	threat = new ThreatLevel();
