@@ -25,12 +25,21 @@ public PlayerStatusMonitor() {
 	this.init();
 }
 
+public static void preInit() {
+	//
+	// TODO - For now we will assume only one init will be needed later we may need different Pre- and Post-Inits
+	//
+	LogHelper.info("Player Status Monitor Pre-Initialization Started");
+	materialLevel = MaterialLevel.BAREHAND;
+	LogHelper.info("Player Status Monitor Pre-Initialization Complete");
+	
+}
+
 public static void init() {
 	//
 	// TODO - For now we will assume only one init will be needed later we may need different Pre- and Post-Inits
 	//
 	LogHelper.info("Player Status Monitor Initialization Started");
-	materialLevel = MaterialLevel.BAREHAND;
 	health = new PlayerDamageLevel();
 	hunger = new PlayerFoodLevel();
 	threat = new ThreatLevel();
@@ -39,6 +48,16 @@ public static void init() {
 	LogHelper.info("Player Condition:"+playerCondition.toString());
 	// playerCondition = new ArrayList<PlayerCondition>;
 	LogHelper.info("Player Status Monitor Initialization Complete");
+	
+}
+
+public static void postInit() {
+	//
+	// TODO - For now we will assume only one init will be needed later we may need different Pre- and Post-Inits
+	//
+	LogHelper.info("Player Status Monitor Post-Initialization Started");
+	// NOOP
+	LogHelper.info("Player Status Monitor Post-Initialization Complete");
 	
 }
 
