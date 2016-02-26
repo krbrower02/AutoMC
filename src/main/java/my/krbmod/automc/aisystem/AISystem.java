@@ -29,6 +29,9 @@ public class AISystem {
 		//
 		// TODO determine which managers kick off in preInit.
 		//
+		PlayerStatusMonitor.preInit();
+		CommandQueue.preInit();
+		
 		aiSystemState = AIReference.AI_STATE_IDLE;
 		
 		LogHelper.info("AI Pre-Initialization Complete");
@@ -46,18 +49,6 @@ public class AISystem {
 		PlayerStatusMonitor.init();
 		CommandQueue.init();
 		GoalManager.init();
-		//
-		// Start with category order then we will reorder and move above this line as we implement dependencies
-		//
-		CombatManager.init();
-		CraftingManager.init();
-		ExplorationManager.init();
-		FarmingManager.init();
-		InventoryManager.init();
-		LumberManager.init();
-		MiningManager.init();
-		MovementManager.init();
-		TerraformManager.init();
 		
 		aiSystemState = AIReference.AI_STATE_IDLE;
 		
@@ -71,6 +62,8 @@ public class AISystem {
 		// 
 		// TODO determine which managers kick off in postInit.
 		//
+		PlayerStatusMonitor.postInit();
+		CommandQueue.postInit();
 		
 		aiSystemState = AIReference.AI_STATE_IDLE;
 		LogHelper.info("AI Post-Initialization Complete");
@@ -81,17 +74,10 @@ public class AISystem {
 
 		aiSystemState = AIReference.AI_STATE_ACTIVE;
 		long startTime = System.currentTimeMillis();
-		long lastTime = System.currentTimeMillis(); 
+		long lastTime = System.currentTimeMillis();
+				
 		while (System.currentTimeMillis()- startTime < 20000) {
-			CombatManager.refreshStatus();
-			CraftingManager.refreshStatus();
-			ExplorationManager.refreshStatus();
-			FarmingManager.refreshStatus();
-			InventoryManager.refreshStatus();
-			LumberManager.refreshStatus();
-			MiningManager.refreshStatus();
-			MovementManager.refreshStatus();
-			TerraformManager.refreshStatus();
+			CommandQueue.run();
 			try {
 			    Thread.sleep(233);	// I want to pause for roughly 1/4 second; I use a prime number to reduce patterns (yes I could have used a random number but didn't want to
 			} catch(InterruptedException ex) {

@@ -3,6 +3,15 @@ package my.krbmod.automc.aisystem.commandqueue;
 //TODO - confirm whether java.util.List or java.awt.List should be used here.
 import java.util.List;
 
+import my.krbmod.automc.aisystem.actions.combat.CombatManager;
+import my.krbmod.automc.aisystem.actions.crafter.CraftingManager;
+import my.krbmod.automc.aisystem.actions.exploration.ExplorationManager;
+import my.krbmod.automc.aisystem.actions.farmer.FarmingManager;
+import my.krbmod.automc.aisystem.actions.inventory.InventoryManager;
+import my.krbmod.automc.aisystem.actions.lumberjack.LumberManager;
+import my.krbmod.automc.aisystem.actions.miner.MiningManager;
+import my.krbmod.automc.aisystem.actions.movement.MovementManager;
+import my.krbmod.automc.aisystem.actions.terraformer.TerraformManager;
 import my.krbmod.automc.aisystem.aihelpers.Actions;
 import my.krbmod.automc.aisystem.aihelpers.CommandStatus;
 import my.krbmod.automc.utility.LogHelper;
@@ -30,9 +39,51 @@ public class CommandQueue {
 	//
 	private static ArrayList<CommandQueueItem> commandQueue = new ArrayList<CommandQueueItem>();
 	
+	public static void preInit() {
+		LogHelper.info("Command Queue Pre-Initialization Started");
+			
+		LogHelper.info("Command Queue Pre-Initialization Complete");
+	}
+	
 	public static void init() {
-		LogHelper.info("Priority Queue Initialization Started");
-		LogHelper.info("Priority Queue Initialization Complete");
+		LogHelper.info("Command Queue Initialization Started");
+		//
+		// Start with category order then we will reorder and move above this line as we implement dependencies
+		//
+		CombatManager.init();
+		CraftingManager.init();
+		ExplorationManager.init();
+		FarmingManager.init();
+		InventoryManager.init();
+		LumberManager.init();
+		MiningManager.init();
+		MovementManager.init();
+		TerraformManager.init();
+		
+		LogHelper.info("Command Queue Initialization Complete");
+	}
+	
+	public static void postInit() {
+		LogHelper.info("Command Queue Post-Initialization Started");
+			
+		LogHelper.info("Command Queue Post-Initialization Complete");
+	}
+	
+	public static void run(){
+		//
+		// For testing purposes we are just going to run refreshStatus() on all Managers
+		//
+		// TODO - build in logic for checking priorities and Authorize Task with Highest Priority
+		//
+		CombatManager.refreshStatus();
+		CraftingManager.refreshStatus();
+		ExplorationManager.refreshStatus();
+		FarmingManager.refreshStatus();
+		InventoryManager.refreshStatus();
+		LumberManager.refreshStatus();
+		MiningManager.refreshStatus();
+		MovementManager.refreshStatus();
+		TerraformManager.refreshStatus();
 	}
 	
 	public void add(){
