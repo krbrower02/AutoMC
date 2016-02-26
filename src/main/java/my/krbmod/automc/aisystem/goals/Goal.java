@@ -1,5 +1,5 @@
 package my.krbmod.automc.aisystem.goals;
-import my.krbmod.automc.aisystem.aihelpers.ActionID;
+import my.krbmod.automc.aisystem.aihelpers.UniqueID;
 import my.krbmod.automc.aisystem.aihelpers.CommandStatus;
 import my.krbmod.automc.aisystem.aihelpers.Actions;
 import my.krbmod.automc.aisystem.commandqueue.CommandItem;

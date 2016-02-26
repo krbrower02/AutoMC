@@ -1,12 +1,11 @@
 package my.krbmod.automc.aisystem.actions.inventory;
 
 import java.util.ArrayList;
+
 import my.krbmod.automc.aisystem.actions.inventory.support.InventoryGoal;
 import my.krbmod.automc.aisystem.actions.inventory.support.InventoryGoals;
 import my.krbmod.automc.aisystem.aihelpers.Actions;
-import my.krbmod.automc.aisystem.aihelpers.CombatStatus;
 import my.krbmod.automc.aisystem.aihelpers.MaterialLevel;
-import my.krbmod.automc.aisystem.commandqueue.CommandItem;
 import my.krbmod.automc.aisystem.commandqueue.CommandQueue;
 import my.krbmod.automc.utility.LogHelper;
 
@@ -44,15 +43,13 @@ public class InventoryManager {
 	//
 	// Allow inventory manager to add goals dynamically either with or without quantity on-hand.
 	//
-	//public static void addGoal(MaterialLevel mlevel, String item, int quantity) {
-	//	inventoryGoalList.add(new InventoryGoal(mlevel, item, quantity, 0));
-	//}
-
-	public static void addGoal(MaterialLevel mlevel, String item, int quantity, int onHand) {
-		//inventoryGoalList.add(new InventoryGoal(mlevel, item, quantity, onHand));
+	public static void addGoal(MaterialLevel mlevel, String item, int quantity) {
+		inventoryGoalList.add(new InventoryGoal(mlevel, item, quantity, 0));
 	}
 
-
+	public static void addGoal(MaterialLevel mlevel, String item, int quantity, int onHand) {
+		inventoryGoalList.add(new InventoryGoal(mlevel, item, quantity, onHand));
+	}
 	
 	public static void registerCommands() {
 		CommandQueue.registerCommand(thisAction, "Equipped");

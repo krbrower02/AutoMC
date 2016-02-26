@@ -5,20 +5,20 @@ import my.krbmod.automc.aisystem.aihelpers.MaterialLevel;
 public class InventoryGoal {
 
 	MaterialLevel materialLevel;
-	String item;
+	String itemName;
 	int need;
 	int have;	 
 	
 	public InventoryGoal(){
 		materialLevel=MaterialLevel.DEFAULT;
-		item = "None";
+		itemName = "None";
 		need = 0;
 		have = 0;	 
 	}
 	
 	public InventoryGoal(MaterialLevel m, String s, int n, int h) {
 		materialLevel=m;
-		item = s;
+		itemName = s;
 		need = n;
 		have = h;	 
 	}

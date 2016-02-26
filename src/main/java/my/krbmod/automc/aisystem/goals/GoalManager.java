@@ -20,14 +20,24 @@ private static Goal[] goalList = new Goal[] {
 // TODO Setup GoalManager Fields
 private static int goal = 0;
 
-public static void init(){
-	//
-	// TODO - For now we will assume only one init will be needed later we may need different Pre- and Post-Inits
-	//
-
+public static void preInit(){
+	LogHelper.info("Goal Manager Pre-Initialization Started");
 	// TODO Implement GoalManager
+	LogHelper.info("Goal Manager Pre-Initialization Complete");
+
+}
+
+public static void init(){
 	LogHelper.info("Goal Manager Initialization Started");
+	// TODO Implement GoalManager
 	LogHelper.info("Goal Manager Initialization Complete");
+
+}
+
+public static void postInit(){
+	LogHelper.info("Goal Manager Post-Initialization Started");
+	// TODO Implement GoalManager
+	LogHelper.info("Goal Manager Post-Initialization Complete");
 
 }
 
