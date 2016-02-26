@@ -1,4 +1,4 @@
-package my.krbmod.automc.aisystem.actions.inventory;
+package my.krbmod.automc.aisystem.actions.inventory.support;
 
 import my.krbmod.automc.aisystem.aihelpers.MaterialLevel;
 

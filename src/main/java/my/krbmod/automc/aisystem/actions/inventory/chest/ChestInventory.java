@@ -1,4 +1,4 @@
-package my.krbmod.automc.aisystem.actions.inventory;
+package my.krbmod.automc.aisystem.actions.inventory.chest;
 //
 //Class to manage player inventory in chests (so we know where to find items)
 //

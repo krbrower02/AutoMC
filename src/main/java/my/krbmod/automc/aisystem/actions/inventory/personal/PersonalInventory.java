@@ -1,6 +1,6 @@
-package my.krbmod.automc.aisystem.actions.inventory;
+package my.krbmod.automc.aisystem.actions.inventory.personal;
 
-import my.krbmod.automc.aisystem.actions.inventory.support.Chest;
+import my.krbmod.automc.aisystem.actions.inventory.chest.Chest;
 import my.krbmod.automc.aisystem.actions.inventory.support.Item;
 import my.krbmod.automc.aisystem.actions.inventory.support.SearchType;
 
