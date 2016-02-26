@@ -1,5 +1,6 @@
 package my.krbmod.automc.aisystem.actions.exploration;
 
+import my.krbmod.automc.aisystem.aihelpers.ActionPriority;
 import my.krbmod.automc.aisystem.aihelpers.Actions;
 import my.krbmod.automc.aisystem.commandqueue.CommandQueue;
 import my.krbmod.automc.utility.LogHelper;
@@ -10,23 +11,32 @@ import my.krbmod.automc.utility.LogHelper;
 public class ExplorationManager {
 	//
 	public static final Actions thisAction = Actions.EXPLORATION;
+	public static long lastChecked = System.currentTimeMillis();
+	public static int defaultPriority = ActionPriority.PRIORITY_EXPLORATION;
+	public static int defaultTimer = ActionPriority.TIMER_EXPLORATION;
 
-	// TODO Setup Exploration Manager Fields
+	// TODO Setup remaining Exploration Manager Fields
+	//
 	// TODO Setup Surface and Subsurface exploration
 	//
 	private static int recipe = 0;
 
-	public static void init(){
+	public static void init() {
 		//
-		// TODO - For now we will assume only one init will be needed later we may need different Pre- and Post-Inits
+		// TODO - For now we will assume everything can be done in Init; later
+		// we may need different Pre- and Post-Inits
 		//
 
-		// TODO Implement Exploration Managerr
+		// TODO Implement Exploration Manager
 		LogHelper.info("Exploration Manager Initialization Started");
+
 		registerCommands();
+		lastChecked = 0; // this is the last time we checked the status; set to
+							// 0 so refreshStatus will always run the first
+							// time.
+
 		LogHelper.info("Exploration Manager Initialization Complete");
 	}
-
 
 	public static void registerCommands() {
 		CommandQueue.registerCommand(thisAction, "Refresh Status");
@@ -36,9 +46,14 @@ public class ExplorationManager {
 	}
 
 	public static void refreshStatus() {
-		//TODO - Get/Refresh Status of Manager
-		
+		if ((System.currentTimeMillis() - lastChecked) >= defaultTimer) {
+			// TODO - Get/Refresh Status of Manager
+			LogHelper.info("Exploration Manager Status Check");
+			// the last thing we do is reset the timer
+			lastChecked = System.currentTimeMillis();
+		}
+		// else we're not ready to check yet and we don't reset the timer
+
 	}
-	
 
 }

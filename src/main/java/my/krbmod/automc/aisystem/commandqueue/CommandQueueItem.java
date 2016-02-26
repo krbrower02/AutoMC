@@ -6,11 +6,12 @@ import my.krbmod.automc.aisystem.aihelpers.Actions;
 
 public class CommandQueueItem {
 
-	private Actions source = Actions.NULL;
-	private Actions target = Actions.NULL;
-	private int actionID = 0;
-	private CommandStatus status = CommandStatus.DORMANT;
-	private int priority = 0;
+	public Actions source = Actions.NULL;
+	public Actions target = Actions.NULL;
+	public int actionID = 0;
+	public CommandStatus status = CommandStatus.DORMANT;
+	public int priority = 0;
+	public long lastchecked = System.currentTimeMillis();
 	
 	public CommandQueueItem() {
 		this(Actions.NULL, Actions.NULL, ActionID.newID(), CommandStatus.DORMANT, 0);
@@ -23,5 +24,6 @@ public class CommandQueueItem {
 		this.actionID = id;
 		this.status = st;
 		this.priority = p;
+		this.lastchecked = System.currentTimeMillis();
 	}
 }

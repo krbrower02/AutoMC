@@ -76,6 +76,34 @@ public class AISystem {
 		LogHelper.info("AI Post-Initialization Complete");
 	}
 	
+	public static void runAI(){
+		LogHelper.info("AI Run Started");
+
+		aiSystemState = AIReference.AI_STATE_ACTIVE;
+		long startTime = System.currentTimeMillis();
+		long lastTime = System.currentTimeMillis(); 
+		while (System.currentTimeMillis()- startTime < 20000) {
+			CombatManager.refreshStatus();
+			CraftingManager.refreshStatus();
+			ExplorationManager.refreshStatus();
+			FarmingManager.refreshStatus();
+			InventoryManager.refreshStatus();
+			LumberManager.refreshStatus();
+			MiningManager.refreshStatus();
+			MovementManager.refreshStatus();
+			TerraformManager.refreshStatus();
+			try {
+			    Thread.sleep(233);	// I want to pause for roughly 1/4 second; I use a prime number to reduce patterns (yes I could have used a random number but didn't want to
+			} catch(InterruptedException ex) {
+			    Thread.currentThread().interrupt();
+			}
+		}
+		
+		aiSystemState = AIReference.AI_STATE_IDLE;
+		LogHelper.info("AI Run Completed");
+	}
+
+	
 	public String getState(){
 		return aiSystemState;
 	}

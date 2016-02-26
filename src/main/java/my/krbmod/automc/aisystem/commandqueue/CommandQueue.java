@@ -4,6 +4,7 @@ package my.krbmod.automc.aisystem.commandqueue;
 import java.util.List;
 
 import my.krbmod.automc.aisystem.aihelpers.Actions;
+import my.krbmod.automc.aisystem.aihelpers.CommandStatus;
 import my.krbmod.automc.utility.LogHelper;
 
 import java.util.LinkedList;
@@ -21,18 +22,16 @@ public class CommandQueue {
 	// Maintain list of all potential commands.  Each Manager registers potential commands.
 	// This allows us to better check to see if a command is valid
 	//
-	private static List<CommandItem> commandList;
+	private static ArrayList<CommandItem> commandList = new ArrayList<CommandItem>();
 	private static int nowServing = 0;
 	
 	//
 	// Maintain list of all active commands.  AI system will add or remove commands as they are processed.
 	//
-	private static List<CommandQueueItem> priorityQueue;
+	private static ArrayList<CommandQueueItem> commandQueue = new ArrayList<CommandQueueItem>();
 	
 	public static void init() {
 		LogHelper.info("Priority Queue Initialization Started");
-		// commandList = new ArrayList<itemItem>;
-		// commandQueue = new ArrayList<PriorityQueueItem>;
 		LogHelper.info("Priority Queue Initialization Complete");
 	}
 	
@@ -57,6 +56,12 @@ public class CommandQueue {
 		return p;
 	}
 
+	public static void removeCompleted(){
+		for (CommandQueueItem o : commandQueue){
+			if (o.status == CommandStatus.COMPLETED)
+				commandQueue.remove(o);
+		}
+	}
 	
 	public static void registerCommand(Actions s, String c) {
 		//TODO - See if command is already registered.  If not, add it.

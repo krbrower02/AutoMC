@@ -69,6 +69,9 @@ public class AutoMC {
 			AISystem.postInit();
 			
 			LogHelper.info("Post Initialization Complete");
+			
+			// I know this doesn't belong here but it's a convenient way to kick off the AI system during testing until I can actually get it to respond to events.
+			AISystem.runAI();
 
 	   }
 
