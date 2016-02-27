@@ -117,7 +117,7 @@ public class CommandQueue {
 	public static void registerCommand(Actions s, String c) {
 		//TODO - See if command is already registered.  If not, add it.
 		CommandItem cmd = new CommandItem(s, c);
-		LogHelper.info("Registering Command"+cmd.toString());
+		//LogHelper.info("Registering Command"+cmd.toString());
 	}
 	
 	public static void unregisterCommand(CommandItem c) {

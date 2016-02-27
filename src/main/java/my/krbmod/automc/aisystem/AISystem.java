@@ -75,7 +75,7 @@ public class AISystem {
 		aiSystemState = AIReference.AI_STATE_ACTIVE;
 		long startTime = System.currentTimeMillis();
 		long lastTime = System.currentTimeMillis();
-				
+		/*		
 		while (System.currentTimeMillis()- startTime < 20000) {
 			CommandQueue.run();
 			try {
@@ -84,7 +84,7 @@ public class AISystem {
 			    Thread.currentThread().interrupt();
 			}
 		}
-		
+		*/
 		aiSystemState = AIReference.AI_STATE_IDLE;
 		LogHelper.info("AI Run Completed");
 	}
