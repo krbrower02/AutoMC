@@ -1,8 +1,13 @@
 package my.krbmod.automc;
 
+import java.util.Map;
+
 import my.krbmod.automc.aisystem.AISystem;
-import my.krbmod.automc.events.player.PlayerEventHookContainer;
-import my.krbmod.automc.handler.ConfigurationHandler;
+import my.krbmod.automc.eventhandler.ConfigurationHandler;
+import my.krbmod.automc.eventhandler.EntityItemEventHandler;
+import my.krbmod.automc.eventhandler.EntityLivingEventHandler;
+import my.krbmod.automc.eventhandler.EntityPlayerEventHandler;
+import my.krbmod.automc.eventhandler.LocalEvent;
 import my.krbmod.automc.proxy.IProxy;
 import my.krbmod.automc.reference.Reference;
 import my.krbmod.automc.utility.LogHelper;
@@ -50,11 +55,12 @@ public class AutoMC {
 		LogHelper.info("Pre Initialization Started");
 
 		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
-		// FMLCommonHandler.instance().bus().register(new
-		// ConfigurationHandler());
 		MinecraftForge.EVENT_BUS.register(new ConfigurationHandler());
-		MinecraftForge.EVENT_BUS.register(new PlayerEventHookContainer());
 
+		MinecraftForge.EVENT_BUS.register(new EntityItemEventHandler());
+		MinecraftForge.EVENT_BUS.register(new EntityLivingEventHandler());
+		MinecraftForge.EVENT_BUS.register(new EntityPlayerEventHandler());
+		
 		//
 		// Pre-Initialize the AI System
 		//
@@ -138,7 +144,10 @@ public class AutoMC {
 	@EventHandler
 	public void serverStoppedEvent(FMLServerStoppedEvent event) {
 		LogHelper.info("FMLServerStoppedEvent");
-
+		EntityItemEventHandler.logEventCounts();
+		EntityLivingEventHandler.logEventCounts();
+		EntityPlayerEventHandler.logEventCounts();
+		
 	}
 
 	

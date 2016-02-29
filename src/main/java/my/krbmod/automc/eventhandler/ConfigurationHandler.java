@@ -1,4 +1,4 @@
-package my.krbmod.automc.handler;
+package my.krbmod.automc.eventhandler;
 
 import java.io.File;
 

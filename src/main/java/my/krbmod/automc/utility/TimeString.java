@@ -1,4 +1,4 @@
-package my.krbmod.automc.aisystem.aihelpers;
+package my.krbmod.automc.utility;
 //
 // Class to manage time as string "MM:SS" and convert to and from seconds in Integer format.
 //

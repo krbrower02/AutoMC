@@ -2,7 +2,7 @@ package my.krbmod.automc.client.gui;
 
 import java.util.List;
 
-import my.krbmod.automc.handler.ConfigurationHandler;
+import my.krbmod.automc.eventhandler.ConfigurationHandler;
 import my.krbmod.automc.reference.Reference;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.ConfigElement;

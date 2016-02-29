@@ -1,6 +1,6 @@
 package my.krbmod.automc.aisystem.status;
 
-import my.krbmod.automc.aisystem.aihelpers.TimeString;
+import my.krbmod.automc.utility.TimeString;
 
 //
 //Class to manage timed conditions that have been added to player
