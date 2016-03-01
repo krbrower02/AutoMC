@@ -4,10 +4,17 @@ import java.util.Map;
 
 import my.krbmod.automc.aisystem.AISystem;
 import my.krbmod.automc.eventhandler.ConfigurationHandler;
-import my.krbmod.automc.eventhandler.EntityItemEventHandler;
-import my.krbmod.automc.eventhandler.EntityLivingEventHandler;
-import my.krbmod.automc.eventhandler.EntityPlayerEventHandler;
-import my.krbmod.automc.eventhandler.LocalEvent;
+import my.krbmod.automc.eventhandler.MFEvent;
+import my.krbmod.automc.eventhandler.MFEventHandler;
+import my.krbmod.automc.eventhandler.MFEventHandlerBrewing;
+import my.krbmod.automc.eventhandler.MFEventHandlerEntity;
+import my.krbmod.automc.eventhandler.MFEventHandlerEntityItem;
+import my.krbmod.automc.eventhandler.MFEventHandlerEntityLiving;
+import my.krbmod.automc.eventhandler.MFEventHandlerEntityMinecart;
+import my.krbmod.automc.eventhandler.MFEventHandlerEntityPlayer;
+import my.krbmod.automc.eventhandler.MFEventHandlerOreGen;
+import my.krbmod.automc.eventhandler.MFEventHandlerTerrainGen;
+import my.krbmod.automc.eventhandler.MFEventHandlerWorld;
 import my.krbmod.automc.proxy.IProxy;
 import my.krbmod.automc.reference.Reference;
 import my.krbmod.automc.utility.LogHelper;
@@ -28,13 +35,6 @@ import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 import net.minecraftforge.fml.common.eventhandler.Event.HasResult;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemPickupEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemSmeltedEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION, guiFactory = Reference.GUI_FACTORY_CLASS)
 public class AutoMC {
@@ -57,9 +57,17 @@ public class AutoMC {
 		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 		MinecraftForge.EVENT_BUS.register(new ConfigurationHandler());
 
-		MinecraftForge.EVENT_BUS.register(new EntityItemEventHandler());
-		MinecraftForge.EVENT_BUS.register(new EntityLivingEventHandler());
-		MinecraftForge.EVENT_BUS.register(new EntityPlayerEventHandler());
+		MinecraftForge.EVENT_BUS.register(new MFEventHandler());
+		MinecraftForge.EVENT_BUS.register(new MFEventHandlerBrewing());
+		MinecraftForge.EVENT_BUS.register(new MFEventHandlerEntity());
+		MinecraftForge.EVENT_BUS.register(new MFEventHandlerEntityItem());
+		MinecraftForge.EVENT_BUS.register(new MFEventHandlerEntityLiving());
+		MinecraftForge.EVENT_BUS.register(new MFEventHandlerEntityMinecart());
+		MinecraftForge.EVENT_BUS.register(new MFEventHandlerEntityPlayer());
+		MinecraftForge.EVENT_BUS.register(new MFEventHandlerWorld());
+		
+		MinecraftForge.TERRAIN_GEN_BUS.register(new MFEventHandlerTerrainGen());
+		MinecraftForge.ORE_GEN_BUS.register(new MFEventHandlerOreGen());
 		
 		//
 		// Pre-Initialize the AI System
@@ -144,10 +152,16 @@ public class AutoMC {
 	@EventHandler
 	public void serverStoppedEvent(FMLServerStoppedEvent event) {
 		LogHelper.info("FMLServerStoppedEvent");
-		EntityItemEventHandler.logEventCounts();
-		EntityLivingEventHandler.logEventCounts();
-		EntityPlayerEventHandler.logEventCounts();
-		
+		MFEventHandler.logEventCounts();
+		MFEventHandlerBrewing.logEventCounts();
+		MFEventHandlerEntity.logEventCounts();
+		MFEventHandlerEntityItem.logEventCounts();
+		MFEventHandlerEntityLiving.logEventCounts();
+		MFEventHandlerEntityMinecart.logEventCounts();
+		MFEventHandlerEntityPlayer.logEventCounts();
+		MFEventHandlerOreGen.logEventCounts();
+		MFEventHandlerTerrainGen.logEventCounts();
+		MFEventHandlerWorld.logEventCounts();
 	}
 
 	

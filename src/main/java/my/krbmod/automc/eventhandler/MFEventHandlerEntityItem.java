@@ -3,29 +3,30 @@ package my.krbmod.automc.eventhandler;
 import java.util.EnumMap;
 import java.util.Map;
 
-import my.krbmod.automc.eventhandler.EntityPlayerEventHandler.LocalEventId;
 import my.krbmod.automc.utility.LogHelper;
 import net.minecraftforge.event.entity.item.ItemEvent;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class EntityItemEventHandler {
+public class MFEventHandlerEntityItem {
 
+	public static String handlerName = "Item Event Handler";
 	public static boolean eventCounting = true;
 	public static boolean eventLogging = true;
-	public static LocalEventId currentEventId;
+	public static MFEventId currentEventId;
 
-	public static EnumMap<LocalEventId, LocalEvent> localEvents = new EnumMap<LocalEventId, LocalEvent>(
-			LocalEventId.class);
+	public static EnumMap<MFEventId, MFEvent> localEvents = new EnumMap<MFEventId, MFEvent>(
+			MFEventId.class);
 
-	protected enum LocalEventId {
+	protected enum MFEventId {
 		ITEM_EVENT, ITEMEXPIRE_EVENT, ITEMTOSS_EVENT
 	}
 
 	public static void logEventCounts() {
 		if (eventCounting) {
-			for (Map.Entry<LocalEventId, LocalEvent> thisEvent : localEvents.entrySet()) {
+			LogHelper.info(String.format(handlerName+" : %d elements",localEvents.size()));
+			for (Map.Entry<MFEventId, MFEvent> thisEvent : localEvents.entrySet()) {
 				LogHelper.info(thisEvent.getValue().eventStamp());
 			}
 
@@ -33,11 +34,11 @@ public class EntityItemEventHandler {
 
 	}
 
-	public EntityItemEventHandler() {
-		LogHelper.info("Item Event Handler has been setup");
-		localEvents.put(LocalEventId.ITEM_EVENT, new LocalEvent("Item", false));
-		localEvents.put(LocalEventId.ITEMEXPIRE_EVENT, new LocalEvent("Item Expire", true));
-		localEvents.put(LocalEventId.ITEMTOSS_EVENT, new LocalEvent("Item Toss", true));
+	public MFEventHandlerEntityItem() {
+		LogHelper.info(handlerName+" has been setup");
+		localEvents.put(MFEventId.ITEM_EVENT, new MFEvent("Item", false));
+		localEvents.put(MFEventId.ITEMEXPIRE_EVENT, new MFEvent("Item Expire", true));
+		localEvents.put(MFEventId.ITEMTOSS_EVENT, new MFEvent("Item Toss", true));
 	}
 
 	/*
@@ -46,9 +47,9 @@ public class EntityItemEventHandler {
 	 */
 	@SubscribeEvent
 	public void itemEvent(ItemEvent event) {
-		currentEventId = LocalEventId.ITEM_EVENT;
+		currentEventId = MFEventId.ITEM_EVENT;
 
-		LocalEvent thisEvent = localEvents.get(currentEventId);
+		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
 		localEvents.put(currentEventId, thisEvent);
 	}
@@ -60,9 +61,9 @@ public class EntityItemEventHandler {
 	 */
 	@SubscribeEvent
 	public void itemExpireEvent(ItemExpireEvent event) {
-		currentEventId = LocalEventId.ITEMEXPIRE_EVENT;
+		currentEventId = MFEventId.ITEMEXPIRE_EVENT;
 
-		LocalEvent thisEvent = localEvents.get(currentEventId);
+		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
 		localEvents.put(currentEventId, thisEvent);
 	}
@@ -74,9 +75,9 @@ public class EntityItemEventHandler {
 	 */
 	@SubscribeEvent
 	public void itemTossEvent(ItemTossEvent event) {
-		currentEventId = LocalEventId.ITEMTOSS_EVENT;
+		currentEventId = MFEventId.ITEMTOSS_EVENT;
 
-		LocalEvent thisEvent = localEvents.get(currentEventId);
+		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
 		localEvents.put(currentEventId, thisEvent);
 	}

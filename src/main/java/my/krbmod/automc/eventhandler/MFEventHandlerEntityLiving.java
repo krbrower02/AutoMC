@@ -3,7 +3,6 @@ package my.krbmod.automc.eventhandler;
 import java.util.EnumMap;
 import java.util.Map;
 
-import my.krbmod.automc.eventhandler.EntityPlayerEventHandler.LocalEventId;
 import my.krbmod.automc.utility.LogHelper;
 import net.minecraftforge.event.entity.item.ItemEvent;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
@@ -21,23 +20,31 @@ import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.living.ZombieEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class EntityLivingEventHandler {
+public class MFEventHandlerEntityLiving {
 
+	public static String handlerName = "Entity Living Event Handler";
 	public static boolean eventCounting = true;
 	public static boolean eventLogging = true;
-	public static LocalEventId currentEventId;
+	public static MFEventId currentEventId;
 
-	public static EnumMap<LocalEventId, LocalEvent> localEvents = new EnumMap<LocalEventId, LocalEvent>(
-			LocalEventId.class);
+	public static EnumMap<MFEventId, MFEvent> localEvents = new EnumMap<MFEventId, MFEvent>(
+			MFEventId.class);
 
-	protected enum LocalEventId {
-		ENDERTELEPORT_EVENT, LIVINGATTACK_EVENT, LIVINGDEATH_EVENT, LIVINGDROPS_EVENT, LIVING_EVENT, LIVING_EVENT_LIVINGJUMP_EVENT, LIVING_EVENT_LIVINGUPDATE_EVENT, LIVINGEXPERIENCEDROP_EVENT, LIVINGFALL_EVENT, LIVINGHEAL_EVENT, LIVINGHURT_EVENT, LIVINGPACKSIZE_EVENT, LIVINGSETATTACKTARGET_EVENT, LIVINGSPAWN_EVENT, LIVINGSPAWN_EVENT_ALLOWDESPAWN, LIVINGSPAWN_EVENT_CHECKSPAWN, LIVINGSPAWN_EVENT_SPECIALSPAWN, ZOMBIE_EVENT, ZOMBIE_EVENT_SUMMONAID_EVENT
+	protected enum MFEventId {
+		ENDERTELEPORT_EVENT, LIVINGATTACK_EVENT, LIVINGDEATH_EVENT, LIVINGDROPS_EVENT, 
+		//LIVING_EVENT - do not subscribe to parent event 
+		LIVING_EVENT_LIVINGJUMP_EVENT, LIVING_EVENT_LIVINGUPDATE_EVENT, LIVINGEXPERIENCEDROP_EVENT, LIVINGFALL_EVENT, LIVINGHEAL_EVENT, LIVINGHURT_EVENT, LIVINGPACKSIZE_EVENT, LIVINGSETATTACKTARGET_EVENT, 
+		//LIVINGSPAWN_EVENT - do not subscribe to parent event
+		LIVINGSPAWN_EVENT_ALLOWDESPAWN, LIVINGSPAWN_EVENT_CHECKSPAWN, LIVINGSPAWN_EVENT_SPECIALSPAWN, 
+		//ZOMBIE_EVENT - do not subscribe to parent event
+		ZOMBIE_EVENT_SUMMONAID_EVENT
 
 	}
 
 	public static void logEventCounts() {
 		if (eventCounting) {
-			for (Map.Entry<LocalEventId, LocalEvent> thisEvent : localEvents.entrySet()) {
+			LogHelper.info(String.format(handlerName+" : %d elements",localEvents.size()));
+			for (Map.Entry<MFEventId, MFEvent> thisEvent : localEvents.entrySet()) {
 				LogHelper.info(thisEvent.getValue().eventStamp());
 			}
 
@@ -45,34 +52,31 @@ public class EntityLivingEventHandler {
 
 	}
 
-	public EntityLivingEventHandler() {
-		LogHelper.info("Entity Living Event Handler has been setup");
-		localEvents.put(LocalEventId.ENDERTELEPORT_EVENT, new LocalEvent("Ender Teleport Event", false));
-		localEvents.put(LocalEventId.LIVINGATTACK_EVENT, new LocalEvent("Living Attack Event", false));
-		localEvents.put(LocalEventId.LIVINGDEATH_EVENT, new LocalEvent("Living Death Event", false));
-		localEvents.put(LocalEventId.LIVINGDROPS_EVENT, new LocalEvent("Living Drops Event", false));
-		localEvents.put(LocalEventId.LIVING_EVENT, new LocalEvent("Living Event", false));
-		localEvents.put(LocalEventId.LIVING_EVENT_LIVINGJUMP_EVENT,
-				new LocalEvent("Living Event - Living Jump Event", false));
-		localEvents.put(LocalEventId.LIVING_EVENT_LIVINGUPDATE_EVENT,
-				new LocalEvent("Living Event - Living Update Event", false));
-		localEvents.put(LocalEventId.LIVINGEXPERIENCEDROP_EVENT, new LocalEvent("Living Experience Drop Event", false));
-		localEvents.put(LocalEventId.LIVINGFALL_EVENT, new LocalEvent("Living Fall Event", false));
-		localEvents.put(LocalEventId.LIVINGHEAL_EVENT, new LocalEvent("Living Heal Event", false));
-		localEvents.put(LocalEventId.LIVINGHURT_EVENT, new LocalEvent("Living Hurt Event", false));
-		localEvents.put(LocalEventId.LIVINGPACKSIZE_EVENT, new LocalEvent("Living Pack Size Event", false));
-		localEvents.put(LocalEventId.LIVINGSETATTACKTARGET_EVENT,
-				new LocalEvent("Living Set Attack Target Event", false));
-		localEvents.put(LocalEventId.LIVINGSPAWN_EVENT, new LocalEvent("Living Spawn Event", false));
-		localEvents.put(LocalEventId.LIVINGSPAWN_EVENT_ALLOWDESPAWN,
-				new LocalEvent("Living Spawn Event - Allow Despawn", false));
-		localEvents.put(LocalEventId.LIVINGSPAWN_EVENT_CHECKSPAWN,
-				new LocalEvent("Living Spawn Event - Check Spawn", false));
-		localEvents.put(LocalEventId.LIVINGSPAWN_EVENT_SPECIALSPAWN,
-				new LocalEvent("Living Spawn Event - Special Spawn", false));
-		localEvents.put(LocalEventId.ZOMBIE_EVENT, new LocalEvent("Zombie Event", false));
-		localEvents.put(LocalEventId.ZOMBIE_EVENT_SUMMONAID_EVENT,
-				new LocalEvent("Zombie Event - Summon Aid Event", false));
+	public MFEventHandlerEntityLiving() {
+		LogHelper.info(handlerName+" has been setup");
+		localEvents.put(MFEventId.ENDERTELEPORT_EVENT, new MFEvent("Ender Teleport Event", false));
+		localEvents.put(MFEventId.LIVINGATTACK_EVENT, new MFEvent("Living Attack Event", false));
+		localEvents.put(MFEventId.LIVINGDEATH_EVENT, new MFEvent("Living Death Event", true));
+		localEvents.put(MFEventId.LIVINGDROPS_EVENT, new MFEvent("Living Drops Event", true));
+		localEvents.put(MFEventId.LIVING_EVENT_LIVINGJUMP_EVENT,
+				new MFEvent("Living Event - Living Jump Event", false));
+		localEvents.put(MFEventId.LIVING_EVENT_LIVINGUPDATE_EVENT,
+				new MFEvent("Living Event - Living Update Event", false));
+		localEvents.put(MFEventId.LIVINGEXPERIENCEDROP_EVENT, new MFEvent("Living Experience Drop Event", true));
+		localEvents.put(MFEventId.LIVINGFALL_EVENT, new MFEvent("Living Fall Event", false));
+		localEvents.put(MFEventId.LIVINGHEAL_EVENT, new MFEvent("Living Heal Event", true));
+		localEvents.put(MFEventId.LIVINGHURT_EVENT, new MFEvent("Living Hurt Event", true));
+		localEvents.put(MFEventId.LIVINGPACKSIZE_EVENT, new MFEvent("Living Pack Size Event", true));
+		localEvents.put(MFEventId.LIVINGSETATTACKTARGET_EVENT,
+				new MFEvent("Living Set Attack Target Event", true));
+		localEvents.put(MFEventId.LIVINGSPAWN_EVENT_ALLOWDESPAWN,
+				new MFEvent("Living Spawn Event - Allow Despawn", false));
+		localEvents.put(MFEventId.LIVINGSPAWN_EVENT_CHECKSPAWN,
+				new MFEvent("Living Spawn Event - Check Spawn", false));
+		localEvents.put(MFEventId.LIVINGSPAWN_EVENT_SPECIALSPAWN,
+				new MFEvent("Living Spawn Event - Special Spawn", true));
+		localEvents.put(MFEventId.ZOMBIE_EVENT_SUMMONAID_EVENT,
+				new MFEvent("Zombie Event - Summon Aid Event", true));
 	}
 
 	/*
@@ -81,9 +85,9 @@ public class EntityLivingEventHandler {
 	 */
 	@SubscribeEvent
 	public void enderTeleportEvent(EnderTeleportEvent event) {
-		currentEventId = LocalEventId.ENDERTELEPORT_EVENT;
+		currentEventId = MFEventId.ENDERTELEPORT_EVENT;
 
-		LocalEvent thisEvent = localEvents.get(currentEventId);
+		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
 		localEvents.put(currentEventId, thisEvent);
 	}
@@ -94,9 +98,9 @@ public class EntityLivingEventHandler {
 	 */
 	@SubscribeEvent
 	public void livingAttackEvent(LivingAttackEvent event) {
-		currentEventId = LocalEventId.LIVINGATTACK_EVENT;
+		currentEventId = MFEventId.LIVINGATTACK_EVENT;
 
-		LocalEvent thisEvent = localEvents.get(currentEventId);
+		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
 		localEvents.put(currentEventId, thisEvent);
 	}
@@ -107,9 +111,9 @@ public class EntityLivingEventHandler {
 	 */
 	@SubscribeEvent
 	public void livingDeathEvent(LivingDeathEvent event) {
-		currentEventId = LocalEventId.LIVINGDEATH_EVENT;
+		currentEventId = MFEventId.LIVINGDEATH_EVENT;
 
-		LocalEvent thisEvent = localEvents.get(currentEventId);
+		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
 		localEvents.put(currentEventId, thisEvent);
 	}
@@ -136,9 +140,9 @@ public class EntityLivingEventHandler {
 	 */
 	@SubscribeEvent
 	public void livingDropsEvent(LivingDropsEvent event) {
-		currentEventId = LocalEventId.LIVINGDROPS_EVENT;
+		currentEventId = MFEventId.LIVINGDROPS_EVENT;
 
-		LocalEvent thisEvent = localEvents.get(currentEventId);
+		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
 		localEvents.put(currentEventId, thisEvent);
 	}
@@ -150,16 +154,9 @@ public class EntityLivingEventHandler {
 	 * 
 	 * All children of this event are fired on the MinecraftForge#EVENT_BUS.
 	 * 
-	 */
-	@SubscribeEvent
-	public void livingEvent(LivingEvent event) {
-		currentEventId = LocalEventId.LIVING_EVENT;
+	*/
 
-		LocalEvent thisEvent = localEvents.get(currentEventId);
-		thisEvent.logEvent(eventCounting, eventLogging);
-		localEvents.put(currentEventId, thisEvent);
-	}
-
+	
 	/*
 	 * LivingJumpEvent is fired when an Entity jumps. This event is fired
 	 * whenever an Entity jumps in EntityLivingBase#jump(),
@@ -174,9 +171,9 @@ public class EntityLivingEventHandler {
 	 */
 	@SubscribeEvent
 	public void livingEventlivingJumpEvent(LivingEvent.LivingJumpEvent event) {
-		currentEventId = LocalEventId.LIVING_EVENT_LIVINGJUMP_EVENT;
+		currentEventId = MFEventId.LIVING_EVENT_LIVINGJUMP_EVENT;
 
-		LocalEvent thisEvent = localEvents.get(currentEventId);
+		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
 		localEvents.put(currentEventId, thisEvent);
 	}
@@ -187,9 +184,9 @@ public class EntityLivingEventHandler {
 	 */
 	@SubscribeEvent
 	public void livingEventlivingUpdateEvent(LivingEvent.LivingUpdateEvent event) {
-		currentEventId = LocalEventId.LIVING_EVENT_LIVINGUPDATE_EVENT;
+		currentEventId = MFEventId.LIVING_EVENT_LIVINGUPDATE_EVENT;
 
-		LocalEvent thisEvent = localEvents.get(currentEventId);
+		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
 		localEvents.put(currentEventId, thisEvent);
 	}
@@ -202,9 +199,9 @@ public class EntityLivingEventHandler {
 	 */
 	@SubscribeEvent
 	public void livingExperienceDropEvent(LivingExperienceDropEvent event) {
-		currentEventId = LocalEventId.LIVINGEXPERIENCEDROP_EVENT;
+		currentEventId = MFEventId.LIVINGEXPERIENCEDROP_EVENT;
 
-		LocalEvent thisEvent = localEvents.get(currentEventId);
+		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
 		localEvents.put(currentEventId, thisEvent);
 	}
@@ -222,9 +219,9 @@ public class EntityLivingEventHandler {
 	 */
 	@SubscribeEvent
 	public void livingFallEvent(LivingFallEvent event) {
-		currentEventId = LocalEventId.LIVINGFALL_EVENT;
+		currentEventId = MFEventId.LIVINGFALL_EVENT;
 
-		LocalEvent thisEvent = localEvents.get(currentEventId);
+		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
 		localEvents.put(currentEventId, thisEvent);
 	}
@@ -235,9 +232,9 @@ public class EntityLivingEventHandler {
 	 */
 	@SubscribeEvent
 	public void livingHealEvent(LivingHealEvent event) {
-		currentEventId = LocalEventId.LIVINGHEAL_EVENT;
+		currentEventId = MFEventId.LIVINGHEAL_EVENT;
 
-		LocalEvent thisEvent = localEvents.get(currentEventId);
+		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
 		localEvents.put(currentEventId, thisEvent);
 	}
@@ -248,9 +245,9 @@ public class EntityLivingEventHandler {
 	 */
 	@SubscribeEvent
 	public void livingHurtEvent(LivingHurtEvent event) {
-		currentEventId = LocalEventId.LIVINGHURT_EVENT;
+		currentEventId = MFEventId.LIVINGHURT_EVENT;
 
-		LocalEvent thisEvent = localEvents.get(currentEventId);
+		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
 		localEvents.put(currentEventId, thisEvent);
 	}
@@ -260,9 +257,9 @@ public class EntityLivingEventHandler {
 	 */
 	@SubscribeEvent
 	public void livingPackSizeEvent(LivingPackSizeEvent event) {
-		currentEventId = LocalEventId.LIVINGPACKSIZE_EVENT;
+		currentEventId = MFEventId.LIVINGPACKSIZE_EVENT;
 
-		LocalEvent thisEvent = localEvents.get(currentEventId);
+		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
 		localEvents.put(currentEventId, thisEvent);
 	}
@@ -285,25 +282,18 @@ public class EntityLivingEventHandler {
 	 */
 	@SubscribeEvent
 	public void livingSetAttackTargetEvent(LivingSetAttackTargetEvent event) {
-		currentEventId = LocalEventId.LIVINGSETATTACKTARGET_EVENT;
+		currentEventId = MFEventId.LIVINGSETATTACKTARGET_EVENT;
 
-		LocalEvent thisEvent = localEvents.get(currentEventId);
+		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
 		localEvents.put(currentEventId, thisEvent);
 	}
 
 	/*
 	 * LivingSpawnEvent is fired whenever a living Entity is spawned.
-	 * 
+	 *
 	 */
-	@SubscribeEvent
-	public void livingSpawnEvent(LivingSpawnEvent event) {
-		currentEventId = LocalEventId.LIVINGSPAWN_EVENT;
 
-		LocalEvent thisEvent = localEvents.get(currentEventId);
-		thisEvent.logEvent(eventCounting, eventLogging);
-		localEvents.put(currentEventId, thisEvent);
-	}
 
 	/*
 	 * Fired each tick for despawnable mobs to allow control over despawning.
@@ -311,9 +301,9 @@ public class EntityLivingEventHandler {
 	 */
 	@SubscribeEvent
 	public void livingSpawnEventAllowDespawn(LivingSpawnEvent.AllowDespawn event) {
-		currentEventId = LocalEventId.LIVINGSPAWN_EVENT_ALLOWDESPAWN;
+		currentEventId = MFEventId.LIVINGSPAWN_EVENT_ALLOWDESPAWN;
 
-		LocalEvent thisEvent = localEvents.get(currentEventId);
+		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
 		localEvents.put(currentEventId, thisEvent);
 	}
@@ -328,9 +318,9 @@ public class EntityLivingEventHandler {
 	 */
 	@SubscribeEvent
 	public void livingSpawnEventCheckSpawn(LivingSpawnEvent.CheckSpawn event) {
-		currentEventId = LocalEventId.LIVINGSPAWN_EVENT_CHECKSPAWN;
+		currentEventId = MFEventId.LIVINGSPAWN_EVENT_CHECKSPAWN;
 
-		LocalEvent thisEvent = localEvents.get(currentEventId);
+		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
 		localEvents.put(currentEventId, thisEvent);
 	}
@@ -347,9 +337,9 @@ public class EntityLivingEventHandler {
 	 */
 	@SubscribeEvent
 	public void livingSpawnEventSpecialSpawn(LivingSpawnEvent.SpecialSpawn event) {
-		currentEventId = LocalEventId.LIVINGSPAWN_EVENT_SPECIALSPAWN;
+		currentEventId = MFEventId.LIVINGSPAWN_EVENT_SPECIALSPAWN;
 
-		LocalEvent thisEvent = localEvents.get(currentEventId);
+		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
 		localEvents.put(currentEventId, thisEvent);
 	}
@@ -357,15 +347,7 @@ public class EntityLivingEventHandler {
 	/*
 	 * ZombieEvent is fired whenever a zombie is spawned for aid.
 	 * 
-	 */
-	@SubscribeEvent
-	public void zombieEvent(ZombieEvent event) {
-		currentEventId = LocalEventId.ZOMBIE_EVENT;
-
-		LocalEvent thisEvent = localEvents.get(currentEventId);
-		thisEvent.logEvent(eventCounting, eventLogging);
-		localEvents.put(currentEventId, thisEvent);
-	}
+	*/
 
 	/*
 	 * SummonAidEvent is fired when a Zombie Entity is summoned.
@@ -373,9 +355,9 @@ public class EntityLivingEventHandler {
 	 */
 	@SubscribeEvent
 	public void zombieEventSummonAidEvent(ZombieEvent.SummonAidEvent event) {
-		currentEventId = LocalEventId.ZOMBIE_EVENT_SUMMONAID_EVENT;
+		currentEventId = MFEventId.ZOMBIE_EVENT_SUMMONAID_EVENT;
 
-		LocalEvent thisEvent = localEvents.get(currentEventId);
+		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
 		localEvents.put(currentEventId, thisEvent);
 	}

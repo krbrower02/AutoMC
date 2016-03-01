@@ -3,17 +3,17 @@ package my.krbmod.automc.eventhandler;
 import my.krbmod.automc.utility.LogHelper;
 import my.krbmod.automc.utility.TimeString;
 
-public class LocalEvent {
+public class MFEvent {
 	private String name;
 	private boolean logEvent;
 	private long lastEventTime = 0;
 	private int eventCounter = 0;
 
-	public LocalEvent() {
+	public MFEvent() {
 		this("Unknown", false);
 	}
 
-	public LocalEvent(String name, boolean logEvent) {
+	public MFEvent(String name, boolean logEvent) {
 		this.name = name;
 		this.logEvent = logEvent;
 		this.lastEventTime = 0;
@@ -21,7 +21,7 @@ public class LocalEvent {
 	}
 	
 	public String eventStamp() {
-		return (String.format("%s %d event%s [Last call: %s]", name, eventCounter, (eventCounter == 1) ? "" : "s" , elapsedString()));
+		return (String.format(": %s %d event%s [Last call: %s]", name, eventCounter, (eventCounter == 1) ? "" : "s" , elapsedString()));
 	}
 
 	public String elapsedString() {
@@ -60,7 +60,7 @@ public class LocalEvent {
 		if (log) {
 			lastEventTime = System.currentTimeMillis();
 			if (logEvent) {
-				LogHelper.info("Event " + name + " has occurred.");
+				LogHelper.info("Event [" + name + "]");
 			}
 		}
 	}
