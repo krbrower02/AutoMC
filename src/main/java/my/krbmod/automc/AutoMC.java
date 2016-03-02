@@ -15,7 +15,9 @@ import my.krbmod.automc.eventhandler.MFEventHandlerEntityPlayer;
 import my.krbmod.automc.eventhandler.MFEventHandlerOreGen;
 import my.krbmod.automc.eventhandler.MFEventHandlerTerrainGen;
 import my.krbmod.automc.eventhandler.MFEventHandlerWorld;
+import my.krbmod.automc.proxy.ClientProxy;
 import my.krbmod.automc.proxy.IProxy;
+import my.krbmod.automc.proxy.ServerProxy;
 import my.krbmod.automc.reference.Reference;
 import my.krbmod.automc.utility.LogHelper;
 import net.minecraftforge.common.MinecraftForge;
@@ -35,6 +37,7 @@ import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 import net.minecraftforge.fml.common.eventhandler.Event.HasResult;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION, guiFactory = Reference.GUI_FACTORY_CLASS)
 public class AutoMC {
@@ -43,7 +46,7 @@ public class AutoMC {
 	public static AutoMC instance;
 
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
-	public static IProxy proxy;
+	public static ClientProxy proxy;
 
 	//
 	// Initialization Events
@@ -83,6 +86,8 @@ public class AutoMC {
 		// Initialize the AI System
 		//
 		LogHelper.info("Initialization Started");
+        proxy.registerKeybindings();
+        NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
 
 		AISystem.Init();
 
