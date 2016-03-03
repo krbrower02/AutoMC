@@ -1,7 +1,7 @@
 package my.krbmod.automc.aisystem.actions.inventory.personal;
 
 import my.krbmod.automc.aisystem.actions.inventory.chest.Chest;
-import my.krbmod.automc.aisystem.actions.inventory.support.Item;
+import my.krbmod.automc.aisystem.actions.inventory.item.ModItemOld;
 import my.krbmod.automc.aisystem.actions.inventory.support.SearchType;
 
 //
@@ -15,11 +15,11 @@ import my.krbmod.automc.aisystem.actions.inventory.support.SearchType;
 //
 public class PersonalInventory {
 
-	public void offload(Item item, Chest chest){
+	public void offload(ModItemOld item, Chest chest){
 		// TODO Implement offload function
 	}
 	
-	public void acquire(Item item, Chest chest){
+	public void acquire(ModItemOld item, Chest chest){
 		// TODO Implement acquire function
 	}
 	
@@ -27,17 +27,17 @@ public class PersonalInventory {
 		// TODO recynchronize with the In-Game Personal Inventory
 	}
 	
-	public void dispose(Item item) {
+	public void dispose(ModItemOld item) {
 		// TODO Throw unneeded item into a hole, off a cliff or into lava
 	}
 	
-	public boolean search(Item item) {
+	public boolean search(ModItemOld item) {
 		boolean found = false;
 		found = search(item, SearchType.IGNORE_MBT);
 		return found;
 	}
 	
-	public boolean search(Item item, SearchType stype) {
+	public boolean search(ModItemOld item, SearchType stype) {
 		boolean found = false;
 		switch (stype){
 		case EXACT: 

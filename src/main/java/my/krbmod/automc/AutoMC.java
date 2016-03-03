@@ -3,6 +3,7 @@ package my.krbmod.automc;
 import java.util.Map;
 
 import my.krbmod.automc.aisystem.AISystem;
+import my.krbmod.automc.client.handler.KeyInputEventHandler;
 import my.krbmod.automc.eventhandler.ConfigurationHandler;
 import my.krbmod.automc.eventhandler.MFEvent;
 import my.krbmod.automc.eventhandler.MFEventHandler;
@@ -16,6 +17,7 @@ import my.krbmod.automc.eventhandler.MFEventHandlerOreGen;
 import my.krbmod.automc.eventhandler.MFEventHandlerTerrainGen;
 import my.krbmod.automc.eventhandler.MFEventHandlerWorld;
 import my.krbmod.automc.proxy.ClientProxy;
+import my.krbmod.automc.proxy.CommonProxy;
 import my.krbmod.automc.proxy.IProxy;
 import my.krbmod.automc.proxy.ServerProxy;
 import my.krbmod.automc.reference.Reference;
@@ -39,14 +41,18 @@ import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 import net.minecraftforge.fml.common.eventhandler.Event.HasResult;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
-@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION, guiFactory = Reference.GUI_FACTORY_CLASS)
+@Mod(
+		modid = Reference.MOD_ID, 
+		name = Reference.MOD_NAME, 
+		version = Reference.VERSION, 
+		guiFactory = Reference.GUI_FACTORY_CLASS)
 public class AutoMC {
 
 	@Instance(Reference.MOD_ID)
 	public static AutoMC instance;
 
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
-	public static ClientProxy proxy;
+	public static CommonProxy proxy;
 
 	//
 	// Initialization Events
@@ -59,19 +65,10 @@ public class AutoMC {
 
 		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 		MinecraftForge.EVENT_BUS.register(new ConfigurationHandler());
+		
+        proxy.registerKeyBindings();
 
-		MinecraftForge.EVENT_BUS.register(new MFEventHandler());
-		MinecraftForge.EVENT_BUS.register(new MFEventHandlerBrewing());
-		MinecraftForge.EVENT_BUS.register(new MFEventHandlerEntity());
-		MinecraftForge.EVENT_BUS.register(new MFEventHandlerEntityItem());
-		MinecraftForge.EVENT_BUS.register(new MFEventHandlerEntityLiving());
-		MinecraftForge.EVENT_BUS.register(new MFEventHandlerEntityMinecart());
-		MinecraftForge.EVENT_BUS.register(new MFEventHandlerEntityPlayer());
-		MinecraftForge.EVENT_BUS.register(new MFEventHandlerWorld());
-		
-		MinecraftForge.TERRAIN_GEN_BUS.register(new MFEventHandlerTerrainGen());
-		MinecraftForge.ORE_GEN_BUS.register(new MFEventHandlerOreGen());
-		
+        		
 		//
 		// Pre-Initialize the AI System
 		//
@@ -86,9 +83,11 @@ public class AutoMC {
 		// Initialize the AI System
 		//
 		LogHelper.info("Initialization Started");
-        proxy.registerKeybindings();
-        NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
-
+        
+        //NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
+		
+		MinecraftForge.EVENT_BUS.register(new KeyInputEventHandler());
+        
 		AISystem.Init();
 
 		LogHelper.info("Initialization Complete");
@@ -102,13 +101,26 @@ public class AutoMC {
 		// Post-Initialize the AI System
 		//
 		AISystem.postInit();
+		
+		MinecraftForge.EVENT_BUS.register(new MFEventHandler());
+		MinecraftForge.EVENT_BUS.register(new MFEventHandlerBrewing());
+		MinecraftForge.EVENT_BUS.register(new MFEventHandlerEntity());
+		MinecraftForge.EVENT_BUS.register(new MFEventHandlerEntityItem());
+		MinecraftForge.EVENT_BUS.register(new MFEventHandlerEntityLiving());
+		MinecraftForge.EVENT_BUS.register(new MFEventHandlerEntityMinecart());
+		MinecraftForge.EVENT_BUS.register(new MFEventHandlerEntityPlayer());
+		MinecraftForge.EVENT_BUS.register(new MFEventHandlerWorld());
+		
+		MinecraftForge.TERRAIN_GEN_BUS.register(new MFEventHandlerTerrainGen());
+		MinecraftForge.ORE_GEN_BUS.register(new MFEventHandlerOreGen());
+
 
 		LogHelper.info("Post Initialization Complete");
 
 		// I know this doesn't belong here but it's a convenient way to kick off
 		// the AI system during testing until I can actually get it to respond
 		// to events.
-		AISystem.runAI();
+		// AISystem.runAI();
 
 	}
 

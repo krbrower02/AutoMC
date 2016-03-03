@@ -1,0 +1,13 @@
+# Keys
+keys.automc.category=Auto MC
+keys.automc.charge=Charge
+keys.automc.release=Release
+
+# Creative Tabs
+itemGroup.automc=Auto MC
+
+# Items
+item.automc:mapleLeaf.name=Maple Leaf of Awesomeness
+
+#Blocks
+tile.automc:flag.name=Canadian Flag of Awesomeness
