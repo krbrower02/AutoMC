@@ -2,6 +2,11 @@ package my.krbmod.automc.proxy;
 
 import my.krbmod.automc.client.gui.GuiBasic;
 import my.krbmod.automc.client.settings.KeyBindings;
+import my.krbmod.automc.init.ModBlocks;
+import my.krbmod.automc.init.ModItems;
+import my.krbmod.automc.utility.LogHelper;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -18,22 +23,10 @@ public class ClientProxy extends CommonProxy {
     
     @Override
     public void registerRenders(){
+    	//ModBlocks.registerRenders();
+		
+    	//ModItems.registerRenders();
 
     }
-
-/*
-    @Override
-    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-            return null;
-    }
-
-    @Override
-    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-    if (ID == GuiBasic.GUI_ID)
-        return new GuiBasic();
-   
-            return null;
-    }
-*/
     
 }

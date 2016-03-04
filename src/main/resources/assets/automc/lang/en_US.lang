@@ -4,10 +4,10 @@ keys.automc.charge=Charge
 keys.automc.release=Release
 
 # Creative Tabs
-itemGroup.automc=Auto MC
+itemGroup.tabautomc=Auto MC Blah
 
 # Items
-item.automc:mapleLeaf.name=Maple Leaf of Awesomeness
+item.automc:mapleLeaf.name=Maple Leaf of Blah
 
 #Blocks
-tile.automc:flag.name=Canadian Flag of Awesomeness
+tile.automc:flagb.name=Canadian Flag of Blah

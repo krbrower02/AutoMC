@@ -16,12 +16,23 @@ import my.krbmod.automc.eventhandler.MFEventHandlerEntityPlayer;
 import my.krbmod.automc.eventhandler.MFEventHandlerOreGen;
 import my.krbmod.automc.eventhandler.MFEventHandlerTerrainGen;
 import my.krbmod.automc.eventhandler.MFEventHandlerWorld;
+import my.krbmod.automc.init.ModBlocks;
+import my.krbmod.automc.init.ModItem;
+import my.krbmod.automc.init.ModItems;
+import my.krbmod.automc.init.ModTab;
+import my.krbmod.automc.init.items.ItemMapleLeaf;
 import my.krbmod.automc.proxy.ClientProxy;
 import my.krbmod.automc.proxy.CommonProxy;
 import my.krbmod.automc.proxy.IProxy;
 import my.krbmod.automc.proxy.ServerProxy;
+import my.krbmod.automc.reference.Names;
 import my.krbmod.automc.reference.Reference;
 import my.krbmod.automc.utility.LogHelper;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.item.Item;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
@@ -40,6 +51,7 @@ import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 import net.minecraftforge.fml.common.eventhandler.Event.HasResult;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod(
 		modid = Reference.MOD_ID, 
@@ -54,6 +66,7 @@ public class AutoMC {
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
 	public static CommonProxy proxy;
 
+	public static Item mapleLeaf;
 	//
 	// Initialization Events
 	//
@@ -65,10 +78,12 @@ public class AutoMC {
 
 		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 		MinecraftForge.EVENT_BUS.register(new ConfigurationHandler());
+	
+		mapleLeaf = new ItemMapleLeaf();
 		
-        proxy.registerKeyBindings();
-
-        		
+		
+//		ModBlocks.init();
+//		ModItems.init();
 		//
 		// Pre-Initialize the AI System
 		//
@@ -84,8 +99,17 @@ public class AutoMC {
 		//
 		LogHelper.info("Initialization Started");
         
-        //NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
-		
+      
+        proxy.registerKeyBindings();
+        //proxy.registerRenders();
+
+        if (event.getSide().isClient()) {
+        	RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
+        
+        	renderItem.getItemModelMesher().register(mapleLeaf, 0, new ModelResourceLocation(Reference.MOD_ID + ":" + ((ItemMapleLeaf) mapleLeaf).getName(), "inventory"));
+
+        }
+        
 		MinecraftForge.EVENT_BUS.register(new KeyInputEventHandler());
         
 		AISystem.Init();

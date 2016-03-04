@@ -1,0 +1,16 @@
+[
+{
+  "modid": "automc",
+  "name": "Automatic Minecrat",
+  "description": "Playes Minecraft Automatically",
+  "version": "1.8.9-1.0",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["KRB"],
+  "credits": "Inspired by Rogue-O-Matic",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
