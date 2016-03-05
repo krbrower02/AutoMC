@@ -1,6 +1,7 @@
 package my.krbmod.automc.eventhandler;
 
 import my.krbmod.automc.utility.LogHelper;
+import my.krbmod.automc.utility.ModTime;
 import my.krbmod.automc.utility.TimeString;
 
 public class MFEvent {
@@ -28,7 +29,7 @@ public class MFEvent {
 		if (lastEventTime == 0) {
 			return "None";
 		} else {
-			return TimeString.toTimeString((int) (System.currentTimeMillis() - lastEventTime)/1000);
+			return ModTime.millisToString(Math.abs((System.currentTimeMillis() - lastEventTime)));
 		}
 		
 	}
@@ -37,7 +38,7 @@ public class MFEvent {
 		if (lastEventTime == 0) {
 			return -1;
 		} else {
-			return (int) (System.currentTimeMillis() - lastEventTime)/1000;			
+			return (int) Math.abs(System.currentTimeMillis() - lastEventTime);			
 		}
 		 
 	}
