@@ -3,6 +3,7 @@ package my.krbmod.automc.eventhandler;
 import java.util.EnumMap;
 import java.util.Map;
 
+import my.krbmod.automc.aisystem.status.WorldStatusMonitor;
 import my.krbmod.automc.utility.LogHelper;
 import net.minecraftforge.event.entity.player.AchievementEvent;
 import net.minecraftforge.event.entity.player.AnvilRepairEvent;
@@ -34,11 +35,10 @@ public class MFEventHandlerEntityPlayer {
 	public static String handlerName = "Entity Player Event Handler";
 	public static boolean eventCounting = true;
 	public static boolean eventLogging = true;
-	public static MFEventId currentEventId;
 
-	public static EnumMap<MFEventId, MFEvent> localEvents = new EnumMap<MFEventId, MFEvent>(MFEventId.class);
+	public static EnumMap<MFEventID, MFEvent> localEvents = new EnumMap<MFEventID, MFEvent>(MFEventID.class);
 
-	protected enum MFEventId {
+	protected enum MFEventID {
 		ACHIEVEMENT_EVENT, ANVILREPAIR_EVENT, ARROWLOOSE_EVENT, ARROWNOCK_EVENT, ATTACKENTITY_EVENT, BONEMEAL_EVENT, ENTITYINTERACT_EVENT, ENTITYITEMPICKUP_EVENT, FILLBUCKET_EVENT, ITEMTOOLTIP_EVENT, PLAYERDESTROYITEM_EVENT, PLAYERDROPS_EVENT,
 		// PLAYER_EVENT - do not subscribe to parent event
 		PLAYER_EVENT_BREAKSPEED, PLAYER_EVENT_CLONE, PLAYER_EVENT_HARVESTCHECK, PLAYER_EVENT_LOADFROMFILE, PLAYER_EVENT_NAMEFORMAT, PLAYER_EVENT_SAVETOFILE, PLAYER_EVENT_STARTTRACKING, PLAYER_EVENT_STOPTRACKING, PLAYERFLYABLEFALL_EVENT, PLAYERINTERACT_EVENT, PLAYEROPENCONTAINER_EVENT, PLAYERPICKUPXP_EVENT, PLAYERSETSPAWN_EVENT, PLAYERSLEEPINBED_EVENT,
@@ -49,7 +49,7 @@ public class MFEventHandlerEntityPlayer {
 	public static void logEventCounts() {
 		if (eventCounting) {
 			LogHelper.info(String.format(handlerName + " : %d elements", localEvents.size()));
-			for (Map.Entry<MFEventId, MFEvent> thisEvent : localEvents.entrySet()) {
+			for (Map.Entry<MFEventID, MFEvent> thisEvent : localEvents.entrySet()) {
 				LogHelper.info(thisEvent.getValue().eventStamp());
 			}
 
@@ -59,39 +59,39 @@ public class MFEventHandlerEntityPlayer {
 
 	public MFEventHandlerEntityPlayer() {
 		LogHelper.info(handlerName + " has been setup");
-		localEvents.put(MFEventId.ACHIEVEMENT_EVENT, new MFEvent("Entity.Player: Achievement", true));
-		localEvents.put(MFEventId.ANVILREPAIR_EVENT, new MFEvent("Entity.Player: Anvil Repair", true));
-		localEvents.put(MFEventId.ARROWLOOSE_EVENT, new MFEvent("Entity.Player: Arrow Loose", true));
-		localEvents.put(MFEventId.ARROWNOCK_EVENT, new MFEvent("Entity.Player: Arrow Nock", true));
-		localEvents.put(MFEventId.ATTACKENTITY_EVENT, new MFEvent("Entity.Player: Attack Entity", true));
-		localEvents.put(MFEventId.BONEMEAL_EVENT, new MFEvent("Entity.Player: Bonemeal", true));
-		localEvents.put(MFEventId.ENTITYINTERACT_EVENT, new MFEvent("Entity.Player: Entity Interact", true));
-		localEvents.put(MFEventId.ENTITYITEMPICKUP_EVENT, new MFEvent("Entity.Player: Entity Item Pickup", true));
-		localEvents.put(MFEventId.FILLBUCKET_EVENT, new MFEvent("Entity.Player: Fill Bucket", true));
-		localEvents.put(MFEventId.ITEMTOOLTIP_EVENT, new MFEvent("Entity.Player: Item Tooltip", false));
-		localEvents.put(MFEventId.PLAYERDESTROYITEM_EVENT, new MFEvent("Entity.Player: Player Destroy Item", true));
-		localEvents.put(MFEventId.PLAYERDROPS_EVENT, new MFEvent("Entity.Player: Player Drops", true));
-		localEvents.put(MFEventId.PLAYER_EVENT_BREAKSPEED, new MFEvent("Entity.Player: Player - Break Speed", false));
-		localEvents.put(MFEventId.PLAYER_EVENT_CLONE, new MFEvent("Entity.Player: Player - Clone", true));
-		localEvents.put(MFEventId.PLAYER_EVENT_HARVESTCHECK, new MFEvent("Entity.Player: Player - Harvest Check", true));
-		localEvents.put(MFEventId.PLAYER_EVENT_LOADFROMFILE, new MFEvent("Entity.Player: Player - Load From File", true));
-		localEvents.put(MFEventId.PLAYER_EVENT_NAMEFORMAT, new MFEvent("Entity.Player: Player - Name Format", true));
-		localEvents.put(MFEventId.PLAYER_EVENT_SAVETOFILE, new MFEvent("Entity.Player: Player - Save To File", true));
-		localEvents.put(MFEventId.PLAYER_EVENT_STARTTRACKING, new MFEvent("Entity.Player: Player - Start Tracking", false));
-		localEvents.put(MFEventId.PLAYER_EVENT_STOPTRACKING, new MFEvent("Entity.Player: Player - Stop Tracking", true));
-		localEvents.put(MFEventId.PLAYERFLYABLEFALL_EVENT, new MFEvent("Entity.Player: Player Flyable Fall", true));
-		localEvents.put(MFEventId.PLAYERINTERACT_EVENT, new MFEvent("Entity.Player: Player Interact", true));
-		localEvents.put(MFEventId.PLAYEROPENCONTAINER_EVENT, new MFEvent("Entity.Player: Player Open Container", false));
-		localEvents.put(MFEventId.PLAYERPICKUPXP_EVENT, new MFEvent("Entity.Player: Player Pickup Xp", true));
-		localEvents.put(MFEventId.PLAYERSETSPAWN_EVENT, new MFEvent("Entity.Player: Player Set Spawn", true));
-		localEvents.put(MFEventId.PLAYERSLEEPINBED_EVENT, new MFEvent("Entity.Player: Player Sleep In Bed", true));
-		localEvents.put(MFEventId.PLAYERUSEITEM_EVENT_FINISH, new MFEvent("Entity.Player: Player Use Item - Finish", true));
-		localEvents.put(MFEventId.PLAYERUSEITEM_EVENT_START, new MFEvent("Entity.Player: Player Use Item - Start", true));
-		localEvents.put(MFEventId.PLAYERUSEITEM_EVENT_STOP, new MFEvent("Entity.Player: Player Use Item - Stop", true));
-		localEvents.put(MFEventId.PLAYERUSEITEM_EVENT_TICK, new MFEvent("Entity.Player: Player Use Item - Tick", true));
-		localEvents.put(MFEventId.PLAYERWAKEUP_EVENT, new MFEvent("Entity.Player: Player Wake Up", true));
-		localEvents.put(MFEventId.SLEEPINGLOCATIONCHECK_EVENT, new MFEvent("Entity.Player: Sleeping Location Check", true));
-		localEvents.put(MFEventId.USEHOE_EVENT, new MFEvent("Entity.Player: Use Hoe", true));
+		localEvents.put(MFEventID.ACHIEVEMENT_EVENT, new MFEvent("Entity.Player: Achievement", true));
+		localEvents.put(MFEventID.ANVILREPAIR_EVENT, new MFEvent("Entity.Player: Anvil Repair", true));
+		localEvents.put(MFEventID.ARROWLOOSE_EVENT, new MFEvent("Entity.Player: Arrow Loose", true));
+		localEvents.put(MFEventID.ARROWNOCK_EVENT, new MFEvent("Entity.Player: Arrow Nock", true));
+		localEvents.put(MFEventID.ATTACKENTITY_EVENT, new MFEvent("Entity.Player: Attack Entity", true));
+		localEvents.put(MFEventID.BONEMEAL_EVENT, new MFEvent("Entity.Player: Bonemeal", true));
+		localEvents.put(MFEventID.ENTITYINTERACT_EVENT, new MFEvent("Entity.Player: Entity Interact", true));
+		localEvents.put(MFEventID.ENTITYITEMPICKUP_EVENT, new MFEvent("Entity.Player: Entity Item Pickup", true));
+		localEvents.put(MFEventID.FILLBUCKET_EVENT, new MFEvent("Entity.Player: Fill Bucket", true));
+		localEvents.put(MFEventID.ITEMTOOLTIP_EVENT, new MFEvent("Entity.Player: Item Tooltip", false));
+		localEvents.put(MFEventID.PLAYERDESTROYITEM_EVENT, new MFEvent("Entity.Player: Player Destroy Item", true));
+		localEvents.put(MFEventID.PLAYERDROPS_EVENT, new MFEvent("Entity.Player: Player Drops", true));
+		localEvents.put(MFEventID.PLAYER_EVENT_BREAKSPEED, new MFEvent("Entity.Player: Player - Break Speed", false));
+		localEvents.put(MFEventID.PLAYER_EVENT_CLONE, new MFEvent("Entity.Player: Player - Clone", true));
+		localEvents.put(MFEventID.PLAYER_EVENT_HARVESTCHECK, new MFEvent("Entity.Player: Player - Harvest Check", true));
+		localEvents.put(MFEventID.PLAYER_EVENT_LOADFROMFILE, new MFEvent("Entity.Player: Player - Load From File", true));
+		localEvents.put(MFEventID.PLAYER_EVENT_NAMEFORMAT, new MFEvent("Entity.Player: Player - Name Format", true));
+		localEvents.put(MFEventID.PLAYER_EVENT_SAVETOFILE, new MFEvent("Entity.Player: Player - Save To File", true));
+		localEvents.put(MFEventID.PLAYER_EVENT_STARTTRACKING, new MFEvent("Entity.Player: Player - Start Tracking", false));
+		localEvents.put(MFEventID.PLAYER_EVENT_STOPTRACKING, new MFEvent("Entity.Player: Player - Stop Tracking", true));
+		localEvents.put(MFEventID.PLAYERFLYABLEFALL_EVENT, new MFEvent("Entity.Player: Player Flyable Fall", true));
+		localEvents.put(MFEventID.PLAYERINTERACT_EVENT, new MFEvent("Entity.Player: Player Interact", true));
+		localEvents.put(MFEventID.PLAYEROPENCONTAINER_EVENT, new MFEvent("Entity.Player: Player Open Container", false));
+		localEvents.put(MFEventID.PLAYERPICKUPXP_EVENT, new MFEvent("Entity.Player: Player Pickup Xp", true));
+		localEvents.put(MFEventID.PLAYERSETSPAWN_EVENT, new MFEvent("Entity.Player: Player Set Spawn", true));
+		localEvents.put(MFEventID.PLAYERSLEEPINBED_EVENT, new MFEvent("Entity.Player: Player Sleep In Bed", true));
+		localEvents.put(MFEventID.PLAYERUSEITEM_EVENT_FINISH, new MFEvent("Entity.Player: Player Use Item - Finish", true));
+		localEvents.put(MFEventID.PLAYERUSEITEM_EVENT_START, new MFEvent("Entity.Player: Player Use Item - Start", true));
+		localEvents.put(MFEventID.PLAYERUSEITEM_EVENT_STOP, new MFEvent("Entity.Player: Player Use Item - Stop", true));
+		localEvents.put(MFEventID.PLAYERUSEITEM_EVENT_TICK, new MFEvent("Entity.Player: Player Use Item - Tick", true));
+		localEvents.put(MFEventID.PLAYERWAKEUP_EVENT, new MFEvent("Entity.Player: Player Wake Up", true));
+		localEvents.put(MFEventID.SLEEPINGLOCATIONCHECK_EVENT, new MFEvent("Entity.Player: Sleeping Location Check", true));
+		localEvents.put(MFEventID.USEHOE_EVENT, new MFEvent("Entity.Player: Use Hoe", true));
 	}
 
 	/*
@@ -100,7 +100,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void achievementEvent(AchievementEvent event) {
-		currentEventId = MFEventId.ACHIEVEMENT_EVENT;
+		MFEventID currentEventId = MFEventID.ACHIEVEMENT_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -112,7 +112,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void anvilRepairEvent(AnvilRepairEvent event) {
-		currentEventId = MFEventId.ANVILREPAIR_EVENT;
+		MFEventID currentEventId = MFEventID.ANVILREPAIR_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -136,7 +136,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void arrowLooseEvent(ArrowLooseEvent event) {
-		currentEventId = MFEventId.ARROWLOOSE_EVENT;
+		MFEventID currentEventId = MFEventID.ARROWLOOSE_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -153,7 +153,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void arrowNockEvent(ArrowNockEvent event) {
-		currentEventId = MFEventId.ARROWNOCK_EVENT;
+		MFEventID currentEventId = MFEventID.ARROWNOCK_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -170,7 +170,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void attackEntityEvent(AttackEntityEvent event) {
-		currentEventId = MFEventId.ATTACKENTITY_EVENT;
+		MFEventID currentEventId = MFEventID.ATTACKENTITY_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -183,7 +183,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void bonemealEvent(BonemealEvent event) {
-		currentEventId = MFEventId.BONEMEAL_EVENT;
+		MFEventID currentEventId = MFEventID.BONEMEAL_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -202,7 +202,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void entityInteractEvent(EntityInteractEvent event) {
-		currentEventId = MFEventId.ENTITYINTERACT_EVENT;
+		MFEventID currentEventId = MFEventID.ENTITYINTERACT_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -215,7 +215,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void entityItemPickupEvent(EntityItemPickupEvent event) {
-		currentEventId = MFEventId.ENTITYITEMPICKUP_EVENT;
+		MFEventID currentEventId = MFEventID.ENTITYITEMPICKUP_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -227,7 +227,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void fillBucketEvent(FillBucketEvent event) {
-		currentEventId = MFEventId.FILLBUCKET_EVENT;
+		MFEventID currentEventId = MFEventID.FILLBUCKET_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -239,7 +239,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void itemTooltipEvent(ItemTooltipEvent event) {
-		currentEventId = MFEventId.ITEMTOOLTIP_EVENT;
+		MFEventID currentEventId = MFEventID.ITEMTOOLTIP_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -263,7 +263,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void playerDestroyItemEvent(PlayerDestroyItemEvent event) {
-		currentEventId = MFEventId.PLAYERDESTROYITEM_EVENT;
+		MFEventID currentEventId = MFEventID.PLAYERDESTROYITEM_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -276,7 +276,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void playerDropsEvent(PlayerDropsEvent event) {
-		currentEventId = MFEventId.PLAYERDROPS_EVENT;
+		MFEventID currentEventId = MFEventID.PLAYERDROPS_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -300,7 +300,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void playerEventBreakSpeed(PlayerEvent.BreakSpeed event) {
-		currentEventId = MFEventId.PLAYER_EVENT_BREAKSPEED;
+		MFEventID currentEventId = MFEventID.PLAYER_EVENT_BREAKSPEED;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -314,7 +314,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void playerEventClone(PlayerEvent.Clone event) {
-		currentEventId = MFEventId.PLAYER_EVENT_CLONE;
+		MFEventID currentEventId = MFEventID.PLAYER_EVENT_CLONE;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -334,7 +334,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void playerEventHarvestCheck(PlayerEvent.HarvestCheck event) {
-		currentEventId = MFEventId.PLAYER_EVENT_HARVESTCHECK;
+		MFEventID currentEventId = MFEventID.PLAYER_EVENT_HARVESTCHECK;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -346,11 +346,12 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void playerEventLoadFromFile(PlayerEvent.LoadFromFile event) {
-		currentEventId = MFEventId.PLAYER_EVENT_LOADFROMFILE;
+		MFEventID currentEventId = MFEventID.PLAYER_EVENT_LOADFROMFILE;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
 		localEvents.put(currentEventId, thisEvent);
+			WorldStatusMonitor.loadPlayer();
 	}
 
 	/*
@@ -365,7 +366,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void playerEventNameFormat(PlayerEvent.NameFormat event) {
-		currentEventId = MFEventId.PLAYER_EVENT_NAMEFORMAT;
+		MFEventID currentEventId = MFEventID.PLAYER_EVENT_NAMEFORMAT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -377,7 +378,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void playerEventSaveToFile(PlayerEvent.SaveToFile event) {
-		currentEventId = MFEventId.PLAYER_EVENT_SAVETOFILE;
+		MFEventID currentEventId = MFEventID.PLAYER_EVENT_SAVETOFILE;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -390,7 +391,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void playerEventStartTracking(PlayerEvent.StartTracking event) {
-		currentEventId = MFEventId.PLAYER_EVENT_STARTTRACKING;
+		MFEventID currentEventId = MFEventID.PLAYER_EVENT_STARTTRACKING;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -404,7 +405,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void playerEventStopTracking(PlayerEvent.StopTracking event) {
-		currentEventId = MFEventId.PLAYER_EVENT_STOPTRACKING;
+		MFEventID currentEventId = MFEventID.PLAYER_EVENT_STOPTRACKING;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -416,7 +417,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void playerFlyableFallEvent(PlayerFlyableFallEvent event) {
-		currentEventId = MFEventId.PLAYERFLYABLEFALL_EVENT;
+		MFEventID currentEventId = MFEventID.PLAYERFLYABLEFALL_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -429,7 +430,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void playerInteractEvent(PlayerInteractEvent event) {
-		currentEventId = MFEventId.PLAYERINTERACT_EVENT;
+		MFEventID currentEventId = MFEventID.PLAYERINTERACT_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -441,7 +442,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void playerOpenContainerEvent(PlayerOpenContainerEvent event) {
-		currentEventId = MFEventId.PLAYEROPENCONTAINER_EVENT;
+		MFEventID currentEventId = MFEventID.PLAYEROPENCONTAINER_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -454,7 +455,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void playerPickupXpEvent(PlayerPickupXpEvent event) {
-		currentEventId = MFEventId.PLAYERPICKUPXP_EVENT;
+		MFEventID currentEventId = MFEventID.PLAYERPICKUPXP_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -466,7 +467,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void playerSetSpawnEvent(PlayerSetSpawnEvent event) {
-		currentEventId = MFEventId.PLAYERSETSPAWN_EVENT;
+		MFEventID currentEventId = MFEventID.PLAYERSETSPAWN_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -479,7 +480,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void playerSleepInBedEvent(PlayerSleepInBedEvent event) {
-		currentEventId = MFEventId.PLAYERSLEEPINBED_EVENT;
+		MFEventID currentEventId = MFEventID.PLAYERSLEEPINBED_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -496,7 +497,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void playerUseItemEventFinish(PlayerUseItemEvent.Finish event) {
-		currentEventId = MFEventId.PLAYERUSEITEM_EVENT_FINISH;
+		MFEventID currentEventId = MFEventID.PLAYERUSEITEM_EVENT_FINISH;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -509,7 +510,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void playerUseItemEventStart(PlayerUseItemEvent.Start event) {
-		currentEventId = MFEventId.PLAYERUSEITEM_EVENT_START;
+		MFEventID currentEventId = MFEventID.PLAYERUSEITEM_EVENT_START;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -522,7 +523,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void playerUseItemEventStop(PlayerUseItemEvent.Stop event) {
-		currentEventId = MFEventId.PLAYERUSEITEM_EVENT_STOP;
+		MFEventID currentEventId = MFEventID.PLAYERUSEITEM_EVENT_STOP;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -535,7 +536,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void playerUseItemEventTick(PlayerUseItemEvent.Tick event) {
-		currentEventId = MFEventId.PLAYERUSEITEM_EVENT_TICK;
+		MFEventID currentEventId = MFEventID.PLAYERUSEITEM_EVENT_TICK;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -549,7 +550,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void playerWakeUpEvent(PlayerWakeUpEvent event) {
-		currentEventId = MFEventId.PLAYERWAKEUP_EVENT;
+		MFEventID currentEventId = MFEventID.PLAYERWAKEUP_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -563,7 +564,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void sleepingLocationCheckEvent(SleepingLocationCheckEvent event) {
-		currentEventId = MFEventId.SLEEPINGLOCATIONCHECK_EVENT;
+		MFEventID currentEventId = MFEventID.SLEEPINGLOCATIONCHECK_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -575,7 +576,7 @@ public class MFEventHandlerEntityPlayer {
 	 */
 	@SubscribeEvent
 	public void useHoeEvent(UseHoeEvent event) {
-		currentEventId = MFEventId.USEHOE_EVENT;
+		MFEventID currentEventId = MFEventID.USEHOE_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);

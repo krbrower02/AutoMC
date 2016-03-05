@@ -1,5 +1,6 @@
 package my.krbmod.automc.eventhandler;
 
+import my.krbmod.automc.aisystem.status.WorldStatusMonitor;
 import my.krbmod.automc.utility.LogHelper;
 import my.krbmod.automc.utility.ModTime;
 import my.krbmod.automc.utility.TimeString;
@@ -20,9 +21,10 @@ public class MFEvent {
 		this.lastEventTime = 0;
 		this.eventCounter = 0;
 	}
-	
+
 	public String eventStamp() {
-		return (String.format(": %s %d event%s [Last call: %s]", name, eventCounter, (eventCounter == 1) ? "" : "s" , elapsedString()));
+		return (String.format(": %s %d event%s [Last call: %s]", name, eventCounter, (eventCounter == 1) ? "" : "s",
+				elapsedString()));
 	}
 
 	public String elapsedString() {
@@ -31,17 +33,18 @@ public class MFEvent {
 		} else {
 			return ModTime.millisToString(Math.abs((System.currentTimeMillis() - lastEventTime)));
 		}
-		
+
 	}
-	
-	public int elapsedInt(){
+
+	public int elapsedInt() {
 		if (lastEventTime == 0) {
 			return -1;
 		} else {
-			return (int) Math.abs(System.currentTimeMillis() - lastEventTime);			
+			return (int) Math.abs(System.currentTimeMillis() - lastEventTime);
 		}
-		 
+
 	}
+
 	public String getEventName() {
 		return this.name;
 	}
@@ -55,15 +58,19 @@ public class MFEvent {
 	}
 
 	public void logEvent(boolean count, boolean log) {
-		if (count) {
-			eventCounter++;
-		}
-		if (log) {
-			lastEventTime = System.currentTimeMillis();
-			if (logEvent) {
-				LogHelper.info("[" + name + "]");
+		if (WorldStatusMonitor.isChunkLoadingFinished()) {  // Track events that occur after Chunk Loading has completed
+
+			if (count) {
+				eventCounter++;
+			}
+			if (log) {
+				lastEventTime = System.currentTimeMillis();
+				if (logEvent) {
+					LogHelper.info("[" + name + "]");
+				}
 			}
 		}
+
 	}
 
 	public int getEventCounter() {

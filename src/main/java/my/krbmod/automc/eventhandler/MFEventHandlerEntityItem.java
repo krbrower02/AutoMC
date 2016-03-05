@@ -14,19 +14,18 @@ public class MFEventHandlerEntityItem {
 	public static String handlerName = "Item Event Handler";
 	public static boolean eventCounting = true;
 	public static boolean eventLogging = true;
-	public static MFEventId currentEventId;
 
-	public static EnumMap<MFEventId, MFEvent> localEvents = new EnumMap<MFEventId, MFEvent>(
-			MFEventId.class);
+	public static EnumMap<MFEventID, MFEvent> localEvents = new EnumMap<MFEventID, MFEvent>(
+			MFEventID.class);
 
-	protected enum MFEventId {
+	protected enum MFEventID {
 		ITEM_EVENT, ITEMEXPIRE_EVENT, ITEMTOSS_EVENT
 	}
 
 	public static void logEventCounts() {
 		if (eventCounting) {
 			LogHelper.info(String.format(handlerName+" : %d elements",localEvents.size()));
-			for (Map.Entry<MFEventId, MFEvent> thisEvent : localEvents.entrySet()) {
+			for (Map.Entry<MFEventID, MFEvent> thisEvent : localEvents.entrySet()) {
 				LogHelper.info(thisEvent.getValue().eventStamp());
 			}
 
@@ -36,9 +35,9 @@ public class MFEventHandlerEntityItem {
 
 	public MFEventHandlerEntityItem() {
 		LogHelper.info(handlerName+" has been setup");
-		localEvents.put(MFEventId.ITEM_EVENT, new MFEvent("Entity.Item: Item", false));
-		localEvents.put(MFEventId.ITEMEXPIRE_EVENT, new MFEvent("Entity.Item: Item Expire", true));
-		localEvents.put(MFEventId.ITEMTOSS_EVENT, new MFEvent("Entity.Item: Item Toss", true));
+		localEvents.put(MFEventID.ITEM_EVENT, new MFEvent("Entity.Item: Item", false));
+		localEvents.put(MFEventID.ITEMEXPIRE_EVENT, new MFEvent("Entity.Item: Item Expire", true));
+		localEvents.put(MFEventID.ITEMTOSS_EVENT, new MFEvent("Entity.Item: Item Toss", true));
 	}
 
 	/*
@@ -47,7 +46,7 @@ public class MFEventHandlerEntityItem {
 	 */
 	@SubscribeEvent
 	public void itemEvent(ItemEvent event) {
-		currentEventId = MFEventId.ITEM_EVENT;
+		MFEventID currentEventId = MFEventID.ITEM_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -61,7 +60,7 @@ public class MFEventHandlerEntityItem {
 	 */
 	@SubscribeEvent
 	public void itemExpireEvent(ItemExpireEvent event) {
-		currentEventId = MFEventId.ITEMEXPIRE_EVENT;
+		MFEventID currentEventId = MFEventID.ITEMEXPIRE_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -75,7 +74,7 @@ public class MFEventHandlerEntityItem {
 	 */
 	@SubscribeEvent
 	public void itemTossEvent(ItemTossEvent event) {
-		currentEventId = MFEventId.ITEMTOSS_EVENT;
+		MFEventID currentEventId = MFEventID.ITEMTOSS_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);

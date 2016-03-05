@@ -16,6 +16,7 @@ import my.krbmod.automc.aisystem.actions.terraformer.TerraformManager;
 import my.krbmod.automc.aisystem.commandqueue.CommandQueue;
 import my.krbmod.automc.aisystem.goals.GoalManager;
 import my.krbmod.automc.aisystem.status.PlayerStatusMonitor;
+import my.krbmod.automc.aisystem.status.WorldStatusMonitor;
 import my.krbmod.automc.utility.LogHelper;
 
 public class AISystem {
@@ -29,6 +30,7 @@ public class AISystem {
 		//
 		// TODO determine which managers kick off in preInit.
 		//
+		WorldStatusMonitor.preInit();
 		PlayerStatusMonitor.preInit();
 		CommandQueue.preInit();
 		
@@ -46,6 +48,7 @@ public class AISystem {
 		//
 		// For now we will assume they all activate in Init.
 		//
+		WorldStatusMonitor.init();
 		PlayerStatusMonitor.init();
 		CommandQueue.init();
 		GoalManager.init();
@@ -62,6 +65,7 @@ public class AISystem {
 		// 
 		// TODO determine which managers kick off in postInit.
 		//
+		WorldStatusMonitor.postInit();
 		PlayerStatusMonitor.postInit();
 		CommandQueue.postInit();
 		

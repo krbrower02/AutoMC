@@ -20,7 +20,7 @@ public class MFEventHandlerTerrainGen {
 	public static String handlerName = "Terrain Gen Event Handler";
 	public static boolean eventCounting = true;
 	public static boolean eventLogging = true;
-	public static MFEventID currentEventId;
+	//public static MFEventID currentEventId;
 
 	public static EnumMap<MFEventID, MFEvent> localEvents = new EnumMap<MFEventID, MFEvent>(MFEventID.class);
 
@@ -95,7 +95,7 @@ public class MFEventHandlerTerrainGen {
 	 */
 	@SubscribeEvent
 	public void biomeEventBiomeColor(BiomeEvent.BiomeColor event) {
-		currentEventId = MFEventID.BIOME_EVENT_BIOMECOLOR;
+		MFEventID currentEventId = MFEventID.BIOME_EVENT_BIOMECOLOR;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -113,7 +113,7 @@ public class MFEventHandlerTerrainGen {
 	 */
 	@SubscribeEvent
 	public void biomeEventCreateDecorator(BiomeEvent.CreateDecorator event) {
-		currentEventId = MFEventID.BIOME_EVENT_CREATEDECORATOR;
+		MFEventID currentEventId = MFEventID.BIOME_EVENT_CREATEDECORATOR;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -126,7 +126,7 @@ public class MFEventHandlerTerrainGen {
 	 */
 	@SubscribeEvent
 	public void biomeEventGetFoliageColor(BiomeEvent.GetFoliageColor event) {
-		currentEventId = MFEventID.BIOME_EVENT_GETFOLIAGECOLOR;
+		MFEventID currentEventId = MFEventID.BIOME_EVENT_GETFOLIAGECOLOR;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -139,7 +139,7 @@ public class MFEventHandlerTerrainGen {
 	 */
 	@SubscribeEvent
 	public void biomeEventGetGrassColor(BiomeEvent.GetGrassColor event) {
-		currentEventId = MFEventID.BIOME_EVENT_GETGRASSCOLOR;
+		MFEventID currentEventId = MFEventID.BIOME_EVENT_GETGRASSCOLOR;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -153,7 +153,7 @@ public class MFEventHandlerTerrainGen {
 	 */
 	@SubscribeEvent
 	public void biomeEventGetVillageBlockID(BiomeEvent.GetVillageBlockID event) {
-		currentEventId = MFEventID.BIOME_EVENT_GETVILLAGEBLOCKID;
+		MFEventID currentEventId = MFEventID.BIOME_EVENT_GETVILLAGEBLOCKID;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -166,7 +166,7 @@ public class MFEventHandlerTerrainGen {
 	 */
 	@SubscribeEvent
 	public void biomeEventGetWaterColor(BiomeEvent.GetWaterColor event) {
-		currentEventId = MFEventID.BIOME_EVENT_GETWATERCOLOR;
+		MFEventID currentEventId = MFEventID.BIOME_EVENT_GETWATERCOLOR;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -179,7 +179,7 @@ public class MFEventHandlerTerrainGen {
 	 */
 	@SubscribeEvent
 	public void chunkProviderEventInitNoiseField(ChunkProviderEvent.InitNoiseField event) {
-		currentEventId = MFEventID.CHUNKPROVIDER_EVENT_INITNOISEFIELD;
+		MFEventID currentEventId = MFEventID.CHUNKPROVIDER_EVENT_INITNOISEFIELD;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -193,7 +193,7 @@ public class MFEventHandlerTerrainGen {
 	 */
 	@SubscribeEvent
 	public void chunkProviderEventReplaceBiomeBlocks(ChunkProviderEvent.ReplaceBiomeBlocks event) {
-		currentEventId = MFEventID.CHUNKPROVIDER_EVENT_REPLACEBIOMEBLOCKS;
+		MFEventID currentEventId = MFEventID.CHUNKPROVIDER_EVENT_REPLACEBIOMEBLOCKS;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -211,7 +211,7 @@ public class MFEventHandlerTerrainGen {
 	 */
 	@SubscribeEvent
 	public void decorateBiomeEventDecorate(DecorateBiomeEvent.Decorate event) {
-		currentEventId = MFEventID.DECORATEBIOME_EVENT_DECORATE;
+		MFEventID currentEventId = MFEventID.DECORATEBIOME_EVENT_DECORATE;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -224,7 +224,7 @@ public class MFEventHandlerTerrainGen {
 	 */
 	@SubscribeEvent
 	public void decorateBiomeEventPost(DecorateBiomeEvent.Post event) {
-		currentEventId = MFEventID.DECORATEBIOME_EVENT_POST;
+		MFEventID currentEventId = MFEventID.DECORATEBIOME_EVENT_POST;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -237,7 +237,7 @@ public class MFEventHandlerTerrainGen {
 	 */
 	@SubscribeEvent
 	public void decorateBiomeEventPre(DecorateBiomeEvent.Pre event) {
-		currentEventId = MFEventID.DECORATEBIOME_EVENT_PRE;
+		MFEventID currentEventId = MFEventID.DECORATEBIOME_EVENT_PRE;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -249,7 +249,7 @@ public class MFEventHandlerTerrainGen {
 	 */
 	@SubscribeEvent
 	public void initMapGenEvent(InitMapGenEvent event) {
-		currentEventId = MFEventID.INITMAPGEN_EVENT;
+		MFEventID currentEventId = MFEventID.INITMAPGEN_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -261,7 +261,7 @@ public class MFEventHandlerTerrainGen {
 	 */
 	@SubscribeEvent
 	public void initNoiseGensEvent(InitNoiseGensEvent event) {
-		currentEventId = MFEventID.INITNOISEGENS_EVENT;
+		MFEventID currentEventId = MFEventID.INITNOISEGENS_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -302,7 +302,7 @@ public class MFEventHandlerTerrainGen {
 	 */
 	@SubscribeEvent
 	public void populateChunkEventPopulate(PopulateChunkEvent.Populate event) {
-		currentEventId = MFEventID.POPULATECHUNK_EVENT_POPULATE;
+		MFEventID currentEventId = MFEventID.POPULATECHUNK_EVENT_POPULATE;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -319,7 +319,7 @@ public class MFEventHandlerTerrainGen {
 	 */
 	@SubscribeEvent
 	public void populateChunkEventPost(PopulateChunkEvent.Post event) {
-		currentEventId = MFEventID.POPULATECHUNK_EVENT_POST;
+		MFEventID currentEventId = MFEventID.POPULATECHUNK_EVENT_POST;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -336,7 +336,7 @@ public class MFEventHandlerTerrainGen {
 	 */
 	@SubscribeEvent
 	public void populateChunkEventPre(PopulateChunkEvent.Pre event) {
-		currentEventId = MFEventID.POPULATECHUNK_EVENT_PRE;
+		MFEventID currentEventId = MFEventID.POPULATECHUNK_EVENT_PRE;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -353,7 +353,7 @@ public class MFEventHandlerTerrainGen {
 	 */
 	@SubscribeEvent
 	public void saplingGrowTreeEvent(SaplingGrowTreeEvent event) {
-		currentEventId = MFEventID.SAPLINGGROWTREEEVENT;
+		MFEventID currentEventId = MFEventID.SAPLINGGROWTREEEVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -381,7 +381,7 @@ public class MFEventHandlerTerrainGen {
 	 */
 	@SubscribeEvent
 	public void worldTypeEventBiomeSize(WorldTypeEvent.BiomeSize event) {
-		currentEventId = MFEventID.WORLDTYPEEVENT_BIOMESIZE;
+		MFEventID currentEventId = MFEventID.WORLDTYPEEVENT_BIOMESIZE;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -396,7 +396,7 @@ public class MFEventHandlerTerrainGen {
 	 */
 	@SubscribeEvent
 	public void worldTypeEventInitBiomeGens(WorldTypeEvent.InitBiomeGens event) {
-		currentEventId = MFEventID.WORLDTYPEEVENT_INITBIOMEGENS;
+		MFEventID currentEventId = MFEventID.WORLDTYPEEVENT_INITBIOMEGENS;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);

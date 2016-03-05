@@ -3,7 +3,6 @@ package my.krbmod.automc.eventhandler;
 import java.util.EnumMap;
 import java.util.Map;
 
-import my.krbmod.automc.eventhandler.MFEventHandlerTerrainGen.MFEventID;
 import my.krbmod.automc.utility.LogHelper;
 import net.minecraftforge.event.terraingen.BiomeEvent;
 import net.minecraftforge.event.terraingen.ChunkProviderEvent;
@@ -23,7 +22,6 @@ public class MFEventHandlerOreGen {
 	public static String handlerName = "Ore Gen Event Handler";
 	public static boolean eventCounting = true;
 	public static boolean eventLogging = true;
-	public static MFEventID currentEventId;
 
 	public static EnumMap<MFEventID, MFEvent> localEvents = new EnumMap<MFEventID, MFEvent>(MFEventID.class);
 
@@ -83,7 +81,7 @@ public class MFEventHandlerOreGen {
 	 */
 	@SubscribeEvent
 	public void oreGenEventGenerateMinable(OreGenEvent.GenerateMinable event) {
-		currentEventId = MFEventID.OREGEN_EVENT_GENERATEMINABLE;
+		MFEventID currentEventId = MFEventID.OREGEN_EVENT_GENERATEMINABLE;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -102,7 +100,7 @@ public class MFEventHandlerOreGen {
 	 */
 	@SubscribeEvent
 	public void oreGenEventPost(OreGenEvent.Post event) {
-		currentEventId = MFEventID.OREGEN_EVENT_POST;
+		MFEventID currentEventId = MFEventID.OREGEN_EVENT_POST;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -121,7 +119,7 @@ public class MFEventHandlerOreGen {
 	 */
 	@SubscribeEvent
 	public void oreGenEventPre(OreGenEvent.Pre event) {
-		currentEventId = MFEventID.OREGEN_EVENT_PRE;
+		MFEventID currentEventId = MFEventID.OREGEN_EVENT_PRE;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);

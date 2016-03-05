@@ -3,6 +3,7 @@ package my.krbmod.automc;
 import java.util.Map;
 
 import my.krbmod.automc.aisystem.AISystem;
+import my.krbmod.automc.aisystem.status.WorldStatusMonitor;
 import my.krbmod.automc.client.handler.KeyInputEventHandler;
 import my.krbmod.automc.eventhandler.ConfigurationHandler;
 import my.krbmod.automc.eventhandler.MFEvent;
@@ -118,7 +119,6 @@ public class AutoMC {
 		MinecraftForge.EVENT_BUS.register(new MFEventHandlerEntityMinecart());
 		MinecraftForge.EVENT_BUS.register(new MFEventHandlerEntityPlayer());
 		MinecraftForge.EVENT_BUS.register(new MFEventHandlerWorld());
-
 		MinecraftForge.TERRAIN_GEN_BUS.register(new MFEventHandlerTerrainGen());
 		MinecraftForge.ORE_GEN_BUS.register(new MFEventHandlerOreGen());
 
@@ -138,7 +138,6 @@ public class AutoMC {
 	@EventHandler
 	public void interModComms(FMLInterModComms event) {
 		LogHelper.info("Another MOD is Sending me a Message");
-		//
 
 		LogHelper.info("I am ignoring It");
 
@@ -164,18 +163,27 @@ public class AutoMC {
 	@EventHandler
 	public void serverStartedEvent(FMLServerStartedEvent event) {
 		LogHelper.info("FMLServerStartedEvent");
+		WorldStatusMonitor.startServer();
 
 	}
 
 	@EventHandler
 	public void serverStoppingEvent(FMLServerStoppingEvent event) {
 		LogHelper.info("FMLServerStoppingEvent");
+		if (WorldStatusMonitor.isServerStarted()) {
+			WorldStatusMonitor.stopServer();
+		}
 
 	}
 
 	@EventHandler
 	public void serverStoppedEvent(FMLServerStoppedEvent event) {
 		LogHelper.info("FMLServerStoppedEvent");
+
+		if (WorldStatusMonitor.isServerStarted()) {
+			WorldStatusMonitor.stopServer();
+		}
+
 		MFEventHandler.logEventCounts();
 		MFEventHandlerBrewing.logEventCounts();
 		MFEventHandlerEntity.logEventCounts();

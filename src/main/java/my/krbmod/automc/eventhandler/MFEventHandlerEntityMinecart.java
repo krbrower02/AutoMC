@@ -14,18 +14,17 @@ public class MFEventHandlerEntityMinecart {
 	public static String handlerName = "Entity Minecart Event Handler";
 	public static boolean eventCounting = true;
 	public static boolean eventLogging = true;
-	public static MFEventId currentEventId;
 
-	public static EnumMap<MFEventId, MFEvent> localEvents = new EnumMap<MFEventId, MFEvent>(MFEventId.class);
+	public static EnumMap<MFEventID, MFEvent> localEvents = new EnumMap<MFEventID, MFEvent>(MFEventID.class);
 
-	protected enum MFEventId {
+	protected enum MFEventID {
 		MINECARTCOLLISION_EVENT, MINECART_EVENT, MINECARTINTERACT_EVENT, MINECARTUPDATE_EVENT
 	}
 
 	public static void logEventCounts() {
 		if (eventCounting) {
 			LogHelper.info(String.format(handlerName+" : %d elements",localEvents.size()));
-			for (Map.Entry<MFEventId, MFEvent> thisEvent : localEvents.entrySet()) {
+			for (Map.Entry<MFEventID, MFEvent> thisEvent : localEvents.entrySet()) {
 				LogHelper.info(thisEvent.getValue().eventStamp());
 			}
 
@@ -35,10 +34,10 @@ public class MFEventHandlerEntityMinecart {
 
 	public MFEventHandlerEntityMinecart() {
 		LogHelper.info(handlerName+" has been setup");
-		localEvents.put(MFEventId.MINECARTCOLLISION_EVENT, new MFEvent("Entity.Minecart: MinecartCollisionEvent", true));
-		localEvents.put(MFEventId.MINECART_EVENT, new MFEvent("Entity.Minecart: MinecartEvent", false));
-		localEvents.put(MFEventId.MINECARTINTERACT_EVENT, new MFEvent("Entity.Minecart: MinecartInteractEvent", true));
-		localEvents.put(MFEventId.MINECARTUPDATE_EVENT, new MFEvent("Entity.Minecart: MinecartUpdateEvent", false));
+		localEvents.put(MFEventID.MINECARTCOLLISION_EVENT, new MFEvent("Entity.Minecart: MinecartCollisionEvent", true));
+		localEvents.put(MFEventID.MINECART_EVENT, new MFEvent("Entity.Minecart: MinecartEvent", false));
+		localEvents.put(MFEventID.MINECARTINTERACT_EVENT, new MFEvent("Entity.Minecart: MinecartInteractEvent", true));
+		localEvents.put(MFEventID.MINECARTUPDATE_EVENT, new MFEvent("Entity.Minecart: MinecartUpdateEvent", false));
 	}
 
 	/*
@@ -46,7 +45,7 @@ public class MFEventHandlerEntityMinecart {
 	 */
 	@SubscribeEvent
 	public void minecartCollisionEvent(MinecartCollisionEvent event) {
-		currentEventId = MFEventId.MINECARTCOLLISION_EVENT;
+		MFEventID currentEventId = MFEventID.MINECARTCOLLISION_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -59,7 +58,7 @@ public class MFEventHandlerEntityMinecart {
 	 */
 	@SubscribeEvent
 	public void minecartEvent(MinecartEvent event) {
-		currentEventId = MFEventId.MINECART_EVENT;
+		MFEventID currentEventId = MFEventID.MINECART_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -71,7 +70,7 @@ public class MFEventHandlerEntityMinecart {
 	 */
 	@SubscribeEvent
 	public void minecartInteractEvent(MinecartInteractEvent event) {
-		currentEventId = MFEventId.MINECARTINTERACT_EVENT;
+		MFEventID currentEventId = MFEventID.MINECARTINTERACT_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -91,7 +90,7 @@ public class MFEventHandlerEntityMinecart {
 	 */
 	@SubscribeEvent
 	public void minecartUpdateEvent(MinecartUpdateEvent event) {
-		currentEventId = MFEventId.MINECARTUPDATE_EVENT;
+		MFEventID currentEventId = MFEventID.MINECARTUPDATE_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);

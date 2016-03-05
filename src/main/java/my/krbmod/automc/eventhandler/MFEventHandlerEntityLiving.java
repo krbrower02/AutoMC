@@ -25,12 +25,11 @@ public class MFEventHandlerEntityLiving {
 	public static String handlerName = "Entity Living Event Handler";
 	public static boolean eventCounting = true;
 	public static boolean eventLogging = true;
-	public static MFEventId currentEventId;
 
-	public static EnumMap<MFEventId, MFEvent> localEvents = new EnumMap<MFEventId, MFEvent>(
-			MFEventId.class);
+	public static EnumMap<MFEventID, MFEvent> localEvents = new EnumMap<MFEventID, MFEvent>(
+			MFEventID.class);
 
-	protected enum MFEventId {
+	protected enum MFEventID {
 		ENDERTELEPORT_EVENT, LIVINGATTACK_EVENT, LIVINGDEATH_EVENT, LIVINGDROPS_EVENT, 
 		//LIVING_EVENT - do not subscribe to parent event 
 		LIVING_EVENT_LIVINGJUMP_EVENT, LIVING_EVENT_LIVINGUPDATE_EVENT, LIVINGEXPERIENCEDROP_EVENT, LIVINGFALL_EVENT, LIVINGHEAL_EVENT, LIVINGHURT_EVENT, LIVINGPACKSIZE_EVENT, LIVINGSETATTACKTARGET_EVENT, 
@@ -44,7 +43,7 @@ public class MFEventHandlerEntityLiving {
 	public static void logEventCounts() {
 		if (eventCounting) {
 			LogHelper.info(String.format(handlerName+" : %d elements",localEvents.size()));
-			for (Map.Entry<MFEventId, MFEvent> thisEvent : localEvents.entrySet()) {
+			for (Map.Entry<MFEventID, MFEvent> thisEvent : localEvents.entrySet()) {
 				LogHelper.info(thisEvent.getValue().eventStamp());
 			}
 
@@ -54,28 +53,28 @@ public class MFEventHandlerEntityLiving {
 
 	public MFEventHandlerEntityLiving() {
 		LogHelper.info(handlerName+" has been setup");
-		localEvents.put(MFEventId.ENDERTELEPORT_EVENT, new MFEvent("Entity.Living: Ender Teleport Event", false));
-		localEvents.put(MFEventId.LIVINGATTACK_EVENT, new MFEvent("Entity.Living: Living Attack Event", false));
-		localEvents.put(MFEventId.LIVINGDEATH_EVENT, new MFEvent("Entity.Living: Living Death Event", true));
-		localEvents.put(MFEventId.LIVINGDROPS_EVENT, new MFEvent("Entity.Living: Living Drops Event", true));
-		localEvents.put(MFEventId.LIVING_EVENT_LIVINGJUMP_EVENT,
+		localEvents.put(MFEventID.ENDERTELEPORT_EVENT, new MFEvent("Entity.Living: Ender Teleport Event", false));
+		localEvents.put(MFEventID.LIVINGATTACK_EVENT, new MFEvent("Entity.Living: Living Attack Event", false));
+		localEvents.put(MFEventID.LIVINGDEATH_EVENT, new MFEvent("Entity.Living: Living Death Event", true));
+		localEvents.put(MFEventID.LIVINGDROPS_EVENT, new MFEvent("Entity.Living: Living Drops Event", true));
+		localEvents.put(MFEventID.LIVING_EVENT_LIVINGJUMP_EVENT,
 				new MFEvent("Entity.Living: Living Event - Living Jump Event", false));
-		localEvents.put(MFEventId.LIVING_EVENT_LIVINGUPDATE_EVENT,
+		localEvents.put(MFEventID.LIVING_EVENT_LIVINGUPDATE_EVENT,
 				new MFEvent("Entity.Living: Living Event - Living Update Event", false));
-		localEvents.put(MFEventId.LIVINGEXPERIENCEDROP_EVENT, new MFEvent("Entity.Living: Living Experience Drop Event", true));
-		localEvents.put(MFEventId.LIVINGFALL_EVENT, new MFEvent("Entity.Living: Living Fall Event", false));
-		localEvents.put(MFEventId.LIVINGHEAL_EVENT, new MFEvent("Entity.Living: Living Heal Event", true));
-		localEvents.put(MFEventId.LIVINGHURT_EVENT, new MFEvent("Entity.Living: Living Hurt Event", true));
-		localEvents.put(MFEventId.LIVINGPACKSIZE_EVENT, new MFEvent("Entity.Living: Living Pack Size Event", false));
-		localEvents.put(MFEventId.LIVINGSETATTACKTARGET_EVENT,
+		localEvents.put(MFEventID.LIVINGEXPERIENCEDROP_EVENT, new MFEvent("Entity.Living: Living Experience Drop Event", true));
+		localEvents.put(MFEventID.LIVINGFALL_EVENT, new MFEvent("Entity.Living: Living Fall Event", false));
+		localEvents.put(MFEventID.LIVINGHEAL_EVENT, new MFEvent("Entity.Living: Living Heal Event", true));
+		localEvents.put(MFEventID.LIVINGHURT_EVENT, new MFEvent("Entity.Living: Living Hurt Event", true));
+		localEvents.put(MFEventID.LIVINGPACKSIZE_EVENT, new MFEvent("Entity.Living: Living Pack Size Event", false));
+		localEvents.put(MFEventID.LIVINGSETATTACKTARGET_EVENT,
 				new MFEvent("Entity.Living: Living Set Attack Target Event", true));
-		localEvents.put(MFEventId.LIVINGSPAWN_EVENT_ALLOWDESPAWN,
+		localEvents.put(MFEventID.LIVINGSPAWN_EVENT_ALLOWDESPAWN,
 				new MFEvent("Entity.Living: Living Spawn Event - Allow Despawn", false));
-		localEvents.put(MFEventId.LIVINGSPAWN_EVENT_CHECKSPAWN,
+		localEvents.put(MFEventID.LIVINGSPAWN_EVENT_CHECKSPAWN,
 				new MFEvent("Entity.Living: Living Spawn Event - Check Spawn", false));
-		localEvents.put(MFEventId.LIVINGSPAWN_EVENT_SPECIALSPAWN,
+		localEvents.put(MFEventID.LIVINGSPAWN_EVENT_SPECIALSPAWN,
 				new MFEvent("Entity.Living: Living Spawn Event - Special Spawn", true));
-		localEvents.put(MFEventId.ZOMBIE_EVENT_SUMMONAID_EVENT,
+		localEvents.put(MFEventID.ZOMBIE_EVENT_SUMMONAID_EVENT,
 				new MFEvent("Entity.Living: Zombie Event - Summon Aid Event", true));
 	}
 
@@ -85,7 +84,7 @@ public class MFEventHandlerEntityLiving {
 	 */
 	@SubscribeEvent
 	public void enderTeleportEvent(EnderTeleportEvent event) {
-		currentEventId = MFEventId.ENDERTELEPORT_EVENT;
+		MFEventID currentEventId = MFEventID.ENDERTELEPORT_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -98,7 +97,7 @@ public class MFEventHandlerEntityLiving {
 	 */
 	@SubscribeEvent
 	public void livingAttackEvent(LivingAttackEvent event) {
-		currentEventId = MFEventId.LIVINGATTACK_EVENT;
+		MFEventID currentEventId = MFEventID.LIVINGATTACK_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -111,7 +110,7 @@ public class MFEventHandlerEntityLiving {
 	 */
 	@SubscribeEvent
 	public void livingDeathEvent(LivingDeathEvent event) {
-		currentEventId = MFEventId.LIVINGDEATH_EVENT;
+		MFEventID currentEventId = MFEventID.LIVINGDEATH_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -140,7 +139,7 @@ public class MFEventHandlerEntityLiving {
 	 */
 	@SubscribeEvent
 	public void livingDropsEvent(LivingDropsEvent event) {
-		currentEventId = MFEventId.LIVINGDROPS_EVENT;
+		MFEventID currentEventId = MFEventID.LIVINGDROPS_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -171,7 +170,7 @@ public class MFEventHandlerEntityLiving {
 	 */
 	@SubscribeEvent
 	public void livingEventlivingJumpEvent(LivingEvent.LivingJumpEvent event) {
-		currentEventId = MFEventId.LIVING_EVENT_LIVINGJUMP_EVENT;
+		MFEventID currentEventId = MFEventID.LIVING_EVENT_LIVINGJUMP_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -184,7 +183,7 @@ public class MFEventHandlerEntityLiving {
 	 */
 	@SubscribeEvent
 	public void livingEventlivingUpdateEvent(LivingEvent.LivingUpdateEvent event) {
-		currentEventId = MFEventId.LIVING_EVENT_LIVINGUPDATE_EVENT;
+		MFEventID currentEventId = MFEventID.LIVING_EVENT_LIVINGUPDATE_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -199,7 +198,7 @@ public class MFEventHandlerEntityLiving {
 	 */
 	@SubscribeEvent
 	public void livingExperienceDropEvent(LivingExperienceDropEvent event) {
-		currentEventId = MFEventId.LIVINGEXPERIENCEDROP_EVENT;
+		MFEventID currentEventId = MFEventID.LIVINGEXPERIENCEDROP_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -219,7 +218,7 @@ public class MFEventHandlerEntityLiving {
 	 */
 	@SubscribeEvent
 	public void livingFallEvent(LivingFallEvent event) {
-		currentEventId = MFEventId.LIVINGFALL_EVENT;
+		MFEventID currentEventId = MFEventID.LIVINGFALL_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -232,7 +231,7 @@ public class MFEventHandlerEntityLiving {
 	 */
 	@SubscribeEvent
 	public void livingHealEvent(LivingHealEvent event) {
-		currentEventId = MFEventId.LIVINGHEAL_EVENT;
+		MFEventID currentEventId = MFEventID.LIVINGHEAL_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -245,7 +244,7 @@ public class MFEventHandlerEntityLiving {
 	 */
 	@SubscribeEvent
 	public void livingHurtEvent(LivingHurtEvent event) {
-		currentEventId = MFEventId.LIVINGHURT_EVENT;
+		MFEventID currentEventId = MFEventID.LIVINGHURT_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -257,7 +256,7 @@ public class MFEventHandlerEntityLiving {
 	 */
 	@SubscribeEvent
 	public void livingPackSizeEvent(LivingPackSizeEvent event) {
-		currentEventId = MFEventId.LIVINGPACKSIZE_EVENT;
+		MFEventID currentEventId = MFEventID.LIVINGPACKSIZE_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -282,7 +281,7 @@ public class MFEventHandlerEntityLiving {
 	 */
 	@SubscribeEvent
 	public void livingSetAttackTargetEvent(LivingSetAttackTargetEvent event) {
-		currentEventId = MFEventId.LIVINGSETATTACKTARGET_EVENT;
+		MFEventID currentEventId = MFEventID.LIVINGSETATTACKTARGET_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -301,7 +300,7 @@ public class MFEventHandlerEntityLiving {
 	 */
 	@SubscribeEvent
 	public void livingSpawnEventAllowDespawn(LivingSpawnEvent.AllowDespawn event) {
-		currentEventId = MFEventId.LIVINGSPAWN_EVENT_ALLOWDESPAWN;
+		MFEventID currentEventId = MFEventID.LIVINGSPAWN_EVENT_ALLOWDESPAWN;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -318,7 +317,7 @@ public class MFEventHandlerEntityLiving {
 	 */
 	@SubscribeEvent
 	public void livingSpawnEventCheckSpawn(LivingSpawnEvent.CheckSpawn event) {
-		currentEventId = MFEventId.LIVINGSPAWN_EVENT_CHECKSPAWN;
+		MFEventID currentEventId = MFEventID.LIVINGSPAWN_EVENT_CHECKSPAWN;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -337,7 +336,7 @@ public class MFEventHandlerEntityLiving {
 	 */
 	@SubscribeEvent
 	public void livingSpawnEventSpecialSpawn(LivingSpawnEvent.SpecialSpawn event) {
-		currentEventId = MFEventId.LIVINGSPAWN_EVENT_SPECIALSPAWN;
+		MFEventID currentEventId = MFEventID.LIVINGSPAWN_EVENT_SPECIALSPAWN;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -355,7 +354,7 @@ public class MFEventHandlerEntityLiving {
 	 */
 	@SubscribeEvent
 	public void zombieEventSummonAidEvent(ZombieEvent.SummonAidEvent event) {
-		currentEventId = MFEventId.ZOMBIE_EVENT_SUMMONAID_EVENT;
+		MFEventID currentEventId = MFEventID.ZOMBIE_EVENT_SUMMONAID_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);

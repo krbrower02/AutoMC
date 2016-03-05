@@ -16,11 +16,10 @@ public class MFEventHandlerEntity {
 	public static String handlerName = "Entity Event Handler";
 	public static boolean eventCounting = true;
 	public static boolean eventLogging = true;
-	public static MFEventId currentEventId;
 
-	public static EnumMap<MFEventId, MFEvent> localEvents = new EnumMap<MFEventId, MFEvent>(MFEventId.class);
+	public static EnumMap<MFEventID, MFEvent> localEvents = new EnumMap<MFEventID, MFEvent>(MFEventID.class);
 
-	protected enum MFEventId {
+	protected enum MFEventID {
 		//ENTITY_EVENT - do not subscribe to parent event
 		ENTITY_EVENT_CANUPDATE, ENTITY_EVENT_ENTERINGCHUNK, ENTITY_EVENT_ENTITYCONSTRUCTING, ENTITYJOINWORLD_EVENT, ENTITYMOUNT_EVENT, ENTITYSTRUCKBYLIGHTNING_EVENT, ENTITYTRAVELTODIMENSION_EVENT, PLAYSOUNDATENTITY_EVENT
 	}
@@ -28,7 +27,7 @@ public class MFEventHandlerEntity {
 	public static void logEventCounts() {
 		if (eventCounting) {
 			LogHelper.info(String.format(handlerName+" : %d elements",localEvents.size()));
-			for (Map.Entry<MFEventId, MFEvent> thisEvent : localEvents.entrySet()) {
+			for (Map.Entry<MFEventID, MFEvent> thisEvent : localEvents.entrySet()) {
 				LogHelper.info(thisEvent.getValue().eventStamp());
 			}
 
@@ -38,15 +37,15 @@ public class MFEventHandlerEntity {
 
 	public MFEventHandlerEntity() {
 		LogHelper.info(handlerName+" has been setup");
-		localEvents.put(MFEventId.ENTITY_EVENT_CANUPDATE, new MFEvent("Entity: Entity Event - Can Update", false));
-		localEvents.put(MFEventId.ENTITY_EVENT_ENTERINGCHUNK, new MFEvent("Entity: Entity Event - Entering Chunk", false));
-		localEvents.put(MFEventId.ENTITY_EVENT_ENTITYCONSTRUCTING,
+		localEvents.put(MFEventID.ENTITY_EVENT_CANUPDATE, new MFEvent("Entity: Entity Event - Can Update", false));
+		localEvents.put(MFEventID.ENTITY_EVENT_ENTERINGCHUNK, new MFEvent("Entity: Entity Event - Entering Chunk", false));
+		localEvents.put(MFEventID.ENTITY_EVENT_ENTITYCONSTRUCTING,
 				new MFEvent("Entity: Entity Event - Entity Constructing", false));
-		localEvents.put(MFEventId.ENTITYJOINWORLD_EVENT, new MFEvent("Entity: Entity Join World Event", false));
-		localEvents.put(MFEventId.ENTITYMOUNT_EVENT, new MFEvent("Entity: Entity Mount Event", true));
-		localEvents.put(MFEventId.ENTITYSTRUCKBYLIGHTNING_EVENT, new MFEvent("Entity: Entity Struck By Lightning Event", true));
-		localEvents.put(MFEventId.ENTITYTRAVELTODIMENSION_EVENT, new MFEvent("Entity: Entity Travel To Dimension Event", true));
-		localEvents.put(MFEventId.PLAYSOUNDATENTITY_EVENT, new MFEvent("Entity: Play Sound At Entity Event", false));
+		localEvents.put(MFEventID.ENTITYJOINWORLD_EVENT, new MFEvent("Entity: Entity Join World Event", false));
+		localEvents.put(MFEventID.ENTITYMOUNT_EVENT, new MFEvent("Entity: Entity Mount Event", true));
+		localEvents.put(MFEventID.ENTITYSTRUCKBYLIGHTNING_EVENT, new MFEvent("Entity: Entity Struck By Lightning Event", true));
+		localEvents.put(MFEventID.ENTITYTRAVELTODIMENSION_EVENT, new MFEvent("Entity: Entity Travel To Dimension Event", true));
+		localEvents.put(MFEventID.PLAYSOUNDATENTITY_EVENT, new MFEvent("Entity: Play Sound At Entity Event", false));
 
 	}
 
@@ -67,7 +66,7 @@ public class MFEventHandlerEntity {
 	 */
 	@SubscribeEvent
 	public void entityEventCanUpdate(EntityEvent.CanUpdate event) {
-		currentEventId = MFEventId.ENTITY_EVENT_CANUPDATE;
+		MFEventID currentEventId = MFEventID.ENTITY_EVENT_CANUPDATE;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -80,7 +79,7 @@ public class MFEventHandlerEntity {
 	 */
 	@SubscribeEvent
 	public void entityEventEnteringChunk(EntityEvent.EnteringChunk event) {
-		currentEventId = MFEventId.ENTITY_EVENT_ENTERINGCHUNK;
+		MFEventID currentEventId = MFEventID.ENTITY_EVENT_ENTERINGCHUNK;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -93,7 +92,7 @@ public class MFEventHandlerEntity {
 	 */
 	@SubscribeEvent
 	public void entityEvententityConstructing(EntityEvent.EntityConstructing event) {
-		currentEventId = MFEventId.ENTITY_EVENT_ENTITYCONSTRUCTING;
+		MFEventID currentEventId = MFEventID.ENTITY_EVENT_ENTITYCONSTRUCTING;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -106,7 +105,7 @@ public class MFEventHandlerEntity {
 	 */
 	@SubscribeEvent
 	public void entityJoinWorldEvent(EntityJoinWorldEvent event) {
-		currentEventId = MFEventId.ENTITYJOINWORLD_EVENT;
+		MFEventID currentEventId = MFEventID.ENTITYJOINWORLD_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -120,7 +119,7 @@ public class MFEventHandlerEntity {
 	 */
 	@SubscribeEvent
 	public void entityMountEvent(EntityMountEvent event) {
-		currentEventId = MFEventId.ENTITYMOUNT_EVENT;
+		MFEventID currentEventId = MFEventID.ENTITYMOUNT_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -144,7 +143,7 @@ public class MFEventHandlerEntity {
 	 */
 	@SubscribeEvent
 	public void entityStruckByLightningEvent(EntityStruckByLightningEvent event) {
-		currentEventId = MFEventId.ENTITYSTRUCKBYLIGHTNING_EVENT;
+		MFEventID currentEventId = MFEventID.ENTITYSTRUCKBYLIGHTNING_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -166,7 +165,7 @@ public class MFEventHandlerEntity {
 	 */
 	@SubscribeEvent
 	public void entityTravelToDimensionEvent(EntityTravelToDimensionEvent event) {
-		currentEventId = MFEventId.ENTITYTRAVELTODIMENSION_EVENT;
+		MFEventID currentEventId = MFEventID.ENTITYTRAVELTODIMENSION_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -204,7 +203,7 @@ public class MFEventHandlerEntity {
 	 */
 	@SubscribeEvent
 	public void playSoundAtEntityEvent(PlaySoundAtEntityEvent event) {
-		currentEventId = MFEventId.PLAYSOUNDATENTITY_EVENT;
+		MFEventID currentEventId = MFEventID.PLAYSOUNDATENTITY_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);

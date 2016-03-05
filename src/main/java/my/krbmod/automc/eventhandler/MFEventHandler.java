@@ -15,11 +15,10 @@ public class MFEventHandler {
 	public static String handlerName = "MF Event Handler";
 	public static boolean eventCounting = true;
 	public static boolean eventLogging = true;
-	public static MFEventId currentEventId;
 
-	public static EnumMap<MFEventId, MFEvent> localEvents = new EnumMap<MFEventId, MFEvent>(MFEventId.class);
+	public static EnumMap<MFEventID, MFEvent> localEvents = new EnumMap<MFEventID, MFEvent>(MFEventID.class);
 
-	protected enum MFEventId {
+	protected enum MFEventID {
 		ANVILUPDATE_EVENT,
 		// ATTACHCAPABILITIES_EVENT - do not subscribe to parent event
 		ATTACHCAPABILITIES_EVENT_ENTITY, ATTACHCAPABILITIES_EVENT_ITEM, ATTACHCAPABILITIES_EVENT_TILEENTITY, COMMAND_EVENT, 
@@ -30,7 +29,7 @@ public class MFEventHandler {
 	public static void logEventCounts() {
 		if (eventCounting) {
 			LogHelper.info(String.format(handlerName+" : %d elements",localEvents.size()));
-			for (Map.Entry<MFEventId, MFEvent> thisEvent : localEvents.entrySet()) {
+			for (Map.Entry<MFEventID, MFEvent> thisEvent : localEvents.entrySet()) {
 				LogHelper.info(thisEvent.getValue().eventStamp());
 			}
 
@@ -40,14 +39,14 @@ public class MFEventHandler {
 
 	public MFEventHandler() {
 		LogHelper.info(handlerName+" has been setup");
-		localEvents.put(MFEventId.ANVILUPDATE_EVENT, new MFEvent("Event: Anvil Update Event", false));
-		localEvents.put(MFEventId.ATTACHCAPABILITIES_EVENT_ENTITY,
+		localEvents.put(MFEventID.ANVILUPDATE_EVENT, new MFEvent("Event: Anvil Update Event", false));
+		localEvents.put(MFEventID.ATTACHCAPABILITIES_EVENT_ENTITY,
 				new MFEvent("Event: Attach Capabilities Event Entity", false));
-		localEvents.put(MFEventId.ATTACHCAPABILITIES_EVENT_ITEM, new MFEvent("Event: Attach Capabilities Event Item", false));
-		localEvents.put(MFEventId.ATTACHCAPABILITIES_EVENT_TILEENTITY,
+		localEvents.put(MFEventID.ATTACHCAPABILITIES_EVENT_ITEM, new MFEvent("Event: Attach Capabilities Event Item", false));
+		localEvents.put(MFEventID.ATTACHCAPABILITIES_EVENT_TILEENTITY,
 				new MFEvent("Event: Attach Capabilities Event Tile Entity", false));
-		localEvents.put(MFEventId.COMMAND_EVENT, new MFEvent("Event: Command Event", true));
-		localEvents.put(MFEventId.SERVERCHAT_EVENT, new MFEvent("Event: Server Chat Event", true));
+		localEvents.put(MFEventID.COMMAND_EVENT, new MFEvent("Event: Command Event", true));
+		localEvents.put(MFEventID.SERVERCHAT_EVENT, new MFEvent("Event: Server Chat Event", true));
 
 	}
 
@@ -58,7 +57,7 @@ public class MFEventHandler {
 	 */
 	@SubscribeEvent
 	public void anvilUpdateEvent(AnvilUpdateEvent event) {
-		currentEventId = MFEventId.ANVILUPDATE_EVENT;
+		MFEventID currentEventId = MFEventID.ANVILUPDATE_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -78,7 +77,7 @@ public class MFEventHandler {
 	 */
 	@SubscribeEvent
 	public void attachCapabilitiesEventEntity(AttachCapabilitiesEvent.Entity event) {
-		currentEventId = MFEventId.ATTACHCAPABILITIES_EVENT_ENTITY;
+		MFEventID currentEventId = MFEventID.ATTACHCAPABILITIES_EVENT_ENTITY;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -91,7 +90,7 @@ public class MFEventHandler {
 	 */
 	@SubscribeEvent
 	public void attachCapabilitiesEventItem(AttachCapabilitiesEvent.Item event) {
-		currentEventId = MFEventId.ATTACHCAPABILITIES_EVENT_ITEM;
+		MFEventID currentEventId = MFEventID.ATTACHCAPABILITIES_EVENT_ITEM;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -104,7 +103,7 @@ public class MFEventHandler {
 	 */
 	@SubscribeEvent
 	public void attachCapabilitiesEventTileEntity(AttachCapabilitiesEvent.TileEntity event) {
-		currentEventId = MFEventId.ATTACHCAPABILITIES_EVENT_TILEENTITY;
+		MFEventID currentEventId = MFEventID.ATTACHCAPABILITIES_EVENT_TILEENTITY;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -117,7 +116,7 @@ public class MFEventHandler {
 	 */
 	@SubscribeEvent
 	public void commandEvent(CommandEvent event) {
-		currentEventId = MFEventId.COMMAND_EVENT;
+		MFEventID currentEventId = MFEventID.COMMAND_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
@@ -130,7 +129,7 @@ public class MFEventHandler {
 	 */
 	@SubscribeEvent
 	public void serverChatEvent(ServerChatEvent event) {
-		currentEventId = MFEventId.SERVERCHAT_EVENT;
+		MFEventID currentEventId = MFEventID.SERVERCHAT_EVENT;
 
 		MFEvent thisEvent = localEvents.get(currentEventId);
 		thisEvent.logEvent(eventCounting, eventLogging);
