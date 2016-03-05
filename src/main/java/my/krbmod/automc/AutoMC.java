@@ -53,11 +53,7 @@ import net.minecraftforge.fml.common.eventhandler.Event.HasResult;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-@Mod(
-		modid = Reference.MOD_ID, 
-		name = Reference.MOD_NAME, 
-		version = Reference.VERSION, 
-		guiFactory = Reference.GUI_FACTORY_CLASS)
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION, guiFactory = Reference.GUI_FACTORY_CLASS)
 public class AutoMC {
 
 	@Instance(Reference.MOD_ID)
@@ -66,7 +62,6 @@ public class AutoMC {
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
 	public static CommonProxy proxy;
 
-	public static Item mapleLeaf;
 	//
 	// Initialization Events
 	//
@@ -78,12 +73,9 @@ public class AutoMC {
 
 		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 		MinecraftForge.EVENT_BUS.register(new ConfigurationHandler());
-	
-		mapleLeaf = new ItemMapleLeaf();
-		
-		
-//		ModBlocks.init();
-//		ModItems.init();
+
+		ModBlocks.init();
+		ModItems.init();
 		//
 		// Pre-Initialize the AI System
 		//
@@ -98,20 +90,12 @@ public class AutoMC {
 		// Initialize the AI System
 		//
 		LogHelper.info("Initialization Started");
-        
-      
-        proxy.registerKeyBindings();
-        //proxy.registerRenders();
 
-        if (event.getSide().isClient()) {
-        	RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-        
-        	renderItem.getItemModelMesher().register(mapleLeaf, 0, new ModelResourceLocation(Reference.MOD_ID + ":" + ((ItemMapleLeaf) mapleLeaf).getName(), "inventory"));
+		proxy.registerKeyBindings();
+		proxy.registerRenders();
 
-        }
-        
 		MinecraftForge.EVENT_BUS.register(new KeyInputEventHandler());
-        
+
 		AISystem.Init();
 
 		LogHelper.info("Initialization Complete");
@@ -125,7 +109,7 @@ public class AutoMC {
 		// Post-Initialize the AI System
 		//
 		AISystem.postInit();
-		
+
 		MinecraftForge.EVENT_BUS.register(new MFEventHandler());
 		MinecraftForge.EVENT_BUS.register(new MFEventHandlerBrewing());
 		MinecraftForge.EVENT_BUS.register(new MFEventHandlerEntity());
@@ -134,10 +118,9 @@ public class AutoMC {
 		MinecraftForge.EVENT_BUS.register(new MFEventHandlerEntityMinecart());
 		MinecraftForge.EVENT_BUS.register(new MFEventHandlerEntityPlayer());
 		MinecraftForge.EVENT_BUS.register(new MFEventHandlerWorld());
-		
+
 		MinecraftForge.TERRAIN_GEN_BUS.register(new MFEventHandlerTerrainGen());
 		MinecraftForge.ORE_GEN_BUS.register(new MFEventHandlerOreGen());
-
 
 		LogHelper.info("Post Initialization Complete");
 
@@ -205,5 +188,4 @@ public class AutoMC {
 		MFEventHandlerWorld.logEventCounts();
 	}
 
-	
 }

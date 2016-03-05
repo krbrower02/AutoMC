@@ -20,20 +20,14 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemMapleLeaf extends Item {
+public class ItemMapleLeaf extends ModItem {
 
-	public ItemMapleLeaf(){
+	
+	public ItemMapleLeaf() {
 		super();
-		GameRegistry.registerItem(this, Names.Items.MAPLE_LEAF);
-		setUnlocalizedName(Reference.MOD_ID+":"+Names.Items.MAPLE_LEAF);
-        setMaxStackSize(64);
-        setCreativeTab(ModTab.AUTOMC_TAB);
-                
+		this.itemName = Names.Items.MAPLE_LEAF;
+		this.setUnlocalizedName(Names.Items.MAPLE_LEAF);
+		this.maxStackSize = 64;
+		this.setCreativeTab(ModTab.AUTOMC_TAB);
 	}
-	
-	public String getName() {
-		return Names.Items.MAPLE_LEAF;
-	
-	}
-	
 }

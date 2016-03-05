@@ -68,7 +68,7 @@ public class MFEventHandlerEntityPlayer {
 		localEvents.put(MFEventId.ENTITYINTERACT_EVENT, new MFEvent("Entity Interact", true));
 		localEvents.put(MFEventId.ENTITYITEMPICKUP_EVENT, new MFEvent("Entity Item Pickup", true));
 		localEvents.put(MFEventId.FILLBUCKET_EVENT, new MFEvent("Fill Bucket", true));
-		localEvents.put(MFEventId.ITEMTOOLTIP_EVENT, new MFEvent("Item Tooltip", true));
+		localEvents.put(MFEventId.ITEMTOOLTIP_EVENT, new MFEvent("Item Tooltip", false));
 		localEvents.put(MFEventId.PLAYERDESTROYITEM_EVENT, new MFEvent("Player Destroy Item", true));
 		localEvents.put(MFEventId.PLAYERDROPS_EVENT, new MFEvent("Player Drops", true));
 		localEvents.put(MFEventId.PLAYER_EVENT_BREAKSPEED, new MFEvent("Player - Break Speed", false));

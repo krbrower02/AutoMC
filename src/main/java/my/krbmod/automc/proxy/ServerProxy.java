@@ -3,8 +3,10 @@ package my.krbmod.automc.proxy;
 import my.krbmod.automc.client.gui.GuiBasic;
 import my.krbmod.automc.utility.LogHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class ServerProxy extends CommonProxy {
 	
@@ -15,7 +17,7 @@ public class ServerProxy extends CommonProxy {
 
     	// NOOP
     }
-
+    
     @Override
     public void registerRenders()
     {

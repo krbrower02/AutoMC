@@ -1,5 +1,5 @@
 {
-    "parent": "automc:block/bflagb",
+    "parent": "automc:block/flag",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

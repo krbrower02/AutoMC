@@ -3,6 +3,7 @@ package my.krbmod.automc.init.blocks;
 import java.util.Random;
 
 import my.krbmod.automc.init.ModBlock;
+import my.krbmod.automc.init.ModTab;
 import my.krbmod.automc.init.items.ItemMapleLeaf;
 import my.krbmod.automc.reference.Names;
 import my.krbmod.automc.reference.Reference;
@@ -26,9 +27,10 @@ public class BlockFlag extends ModBlock {
 
 	public BlockFlag() {
 		super(Material.ground);
+		this.blockName = Names.Blocks.FLAG;
+		setUnlocalizedName(Names.Blocks.FLAG);
+		setCreativeTab(ModTab.AUTOMC_TAB);
 
-		//this.setRegistryName(Reference.MOD_ID + Names.Blocks.FLAG);
-	    //this.setUnlocalizedName(Names.Blocks.FLAG);
 	}
 
 }

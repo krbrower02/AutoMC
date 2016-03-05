@@ -70,7 +70,7 @@ public class MFEventHandlerWorld {
 		localEvents.put(MFEventId.BLOCKEVENT_BREAKEVENT, new MFEvent("Block Event - Break Event", true));
 		localEvents.put(MFEventId.BLOCKEVENT_HARVESTDROPSEVENT, new MFEvent("Block Event - Harves tDrops Event", true));
 		localEvents.put(MFEventId.BLOCKEVENT_MULTIPLACEEVENT, new MFEvent("Block Event - Multi Place Event", true));
-		localEvents.put(MFEventId.BLOCKEVENT_NEIGHBORNOTIFYEVENT, new MFEvent("Block Event - Neighbor Notify Event", true));
+		localEvents.put(MFEventId.BLOCKEVENT_NEIGHBORNOTIFYEVENT, new MFEvent("Block Event - Neighbor Notify Event", false));
 		localEvents.put(MFEventId.BLOCKEVENT_PLACEEVENT, new MFEvent("Block Event - Place Event", true));
 		localEvents.put(MFEventId.CHUNKDATAEVENT_LOAD, new MFEvent("Chunk Data Event - Load", false));
 		localEvents.put(MFEventId.CHUNKDATAEVENT_SAVE, new MFEvent("Chunk Data Event - Save", false));

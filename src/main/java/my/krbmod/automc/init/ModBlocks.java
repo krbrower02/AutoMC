@@ -8,29 +8,37 @@ import my.krbmod.automc.utility.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @GameRegistry.ObjectHolder(Reference.MOD_ID)
 public class ModBlocks {
 
-	//public static final ModBlock flag = new BlockFlag();
+	public static final ModBlock flag = new BlockFlag();
 	
-	//BlockFlag abc;
-	
+	private static ModBlock getRegisteredItem(String name) {
+		return (ModBlock) Block.blockRegistry.getObject(new ResourceLocation(name));
+	}
+
 	public static void init()
 	{
 		
-		//GameRegistry.registerBlock(flag, Names.Blocks.FLAG);
-		
+		LogHelper.info("Registration of Blocks should be in Pre Initialization");
+
+		GameRegistry.registerBlock(flag, Names.Blocks.FLAG);
+	
 	}
 		
 	public static void registerRenders()
 	{
-		//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(flag), 0, new ModelResourceLocation(Reference.MOD_ID + ":" + Names.Blocks.FLAG));
+		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
 		
+    	renderItem.getItemModelMesher().register(Item.getItemFromBlock(flag), 0, new ModelResourceLocation(Reference.MOD_ID + ":" + ModBlocks.flag.getName(), "inventory"));
+
 	}
 	
 

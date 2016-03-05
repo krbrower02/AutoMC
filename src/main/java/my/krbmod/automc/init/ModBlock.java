@@ -2,6 +2,7 @@ package my.krbmod.automc.init;
 
 import java.util.Random;
 
+import my.krbmod.automc.reference.Names;
 import my.krbmod.automc.reference.Textures;
 import my.krbmod.automc.utility.LogHelper;
 import net.minecraft.block.Block;
@@ -18,30 +19,32 @@ import net.minecraft.world.World;
 
 public class ModBlock extends Block {
 
-	   public ModBlock()
-	    {
-	        this(Material.ground);
-	    }
+	public String blockName = "Default";
 
-	    public ModBlock(Material material)
-	    {
-	        super(material);
-	        //this.setCreativeTab(ModTab.AUTOMC_TAB);
-	        
-	    }
+	public ModBlock() {
+		this(Material.ground);
 
-	    @Override
-	    public String getUnlocalizedName()
-	    {
-	        return String.format("tile.%s%s", Textures.RESOURCE_PREFIX, getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+	}
 
-	    }
+	public ModBlock(Material material) {
+		super(material);
+	}
 
-	    protected String getUnwrappedUnlocalizedName(String unlocalizedName)
-	    {
+	@Override
+	public String getUnlocalizedName() {
+		return String.format("tile.%s%s", Textures.RESOURCE_PREFIX,
+				getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
 
-	        return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
+	}
 
-	    }
+	protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
 
+		return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
+
+	}
+
+	public String getName() {
+		return this.blockName;
+
+	}
 }

@@ -1,7 +1,7 @@
 package my.krbmod.automc.init;
 
 
-import my.krbmod.automc.AutoMC;
+import my.krbmod.automc.init.ModItems;
 import my.krbmod.automc.reference.Reference;
 import my.krbmod.automc.utility.LogHelper;
 import net.minecraft.creativetab.CreativeTabs;
@@ -14,7 +14,7 @@ public class ModTab {
 
 		@Override
 		public Item getTabIconItem() {
-				return AutoMC.mapleLeaf;
+				return ModItems.mapleLeaf;
 		}
     };
 

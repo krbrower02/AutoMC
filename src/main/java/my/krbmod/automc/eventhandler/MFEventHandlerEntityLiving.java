@@ -66,7 +66,7 @@ public class MFEventHandlerEntityLiving {
 		localEvents.put(MFEventId.LIVINGFALL_EVENT, new MFEvent("Living Fall Event", false));
 		localEvents.put(MFEventId.LIVINGHEAL_EVENT, new MFEvent("Living Heal Event", true));
 		localEvents.put(MFEventId.LIVINGHURT_EVENT, new MFEvent("Living Hurt Event", true));
-		localEvents.put(MFEventId.LIVINGPACKSIZE_EVENT, new MFEvent("Living Pack Size Event", true));
+		localEvents.put(MFEventId.LIVINGPACKSIZE_EVENT, new MFEvent("Living Pack Size Event", false));
 		localEvents.put(MFEventId.LIVINGSETATTACKTARGET_EVENT,
 				new MFEvent("Living Set Attack Target Event", true));
 		localEvents.put(MFEventId.LIVINGSPAWN_EVENT_ALLOWDESPAWN,
