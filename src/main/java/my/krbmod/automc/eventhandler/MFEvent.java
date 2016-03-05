@@ -60,7 +60,7 @@ public class MFEvent {
 		if (log) {
 			lastEventTime = System.currentTimeMillis();
 			if (logEvent) {
-				LogHelper.info("Event [" + name + "]");
+				LogHelper.info("[" + name + "]");
 			}
 		}
 	}

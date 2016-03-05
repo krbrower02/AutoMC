@@ -54,29 +54,29 @@ public class MFEventHandlerTerrainGen {
 
 	public MFEventHandlerTerrainGen() {
 		LogHelper.info(handlerName+" has been setup");
-		localEvents.put(MFEventID.BIOME_EVENT_BIOMECOLOR, new MFEvent("Biome Event - Biome Color", true));
-		localEvents.put(MFEventID.BIOME_EVENT_CREATEDECORATOR, new MFEvent("Biome Event - Create Decorator", true));
-		localEvents.put(MFEventID.BIOME_EVENT_GETFOLIAGECOLOR, new MFEvent("Biome Event - Get Foliage Color", true));
-		localEvents.put(MFEventID.BIOME_EVENT_GETGRASSCOLOR, new MFEvent("Biome Event - Get Grass Color", true));
+		localEvents.put(MFEventID.BIOME_EVENT_BIOMECOLOR, new MFEvent("TerrainGen: Biome Event - Biome Color", true));
+		localEvents.put(MFEventID.BIOME_EVENT_CREATEDECORATOR, new MFEvent("TerrainGen: Biome Event - Create Decorator", true));
+		localEvents.put(MFEventID.BIOME_EVENT_GETFOLIAGECOLOR, new MFEvent("TerrainGen: Biome Event - Get Foliage Color", true));
+		localEvents.put(MFEventID.BIOME_EVENT_GETGRASSCOLOR, new MFEvent("TerrainGen: Biome Event - Get Grass Color", true));
 		localEvents.put(MFEventID.BIOME_EVENT_GETVILLAGEBLOCKID,
-				new MFEvent("Biome Event - Get Village Block ID", true));
-		localEvents.put(MFEventID.BIOME_EVENT_GETWATERCOLOR, new MFEvent("Biome Event - Get Water Color", false));
+				new MFEvent("TerrainGen: Biome Event - Get Village Block ID", true));
+		localEvents.put(MFEventID.BIOME_EVENT_GETWATERCOLOR, new MFEvent("TerrainGen: Biome Event - Get Water Color", false));
 		localEvents.put(MFEventID.CHUNKPROVIDER_EVENT_INITNOISEFIELD,
-				new MFEvent("Chunk Provider Event - Init Noise Field", true));
+				new MFEvent("TerrainGen: Chunk Provider Event - Init Noise Field", true));
 		localEvents.put(MFEventID.CHUNKPROVIDER_EVENT_REPLACEBIOMEBLOCKS,
-				new MFEvent("Chunk Provider Event - Replace Biome Blocks", true));
-		localEvents.put(MFEventID.DECORATEBIOME_EVENT_DECORATE, new MFEvent("Decorate Biome Event - Decorate", true));
-		localEvents.put(MFEventID.DECORATEBIOME_EVENT_POST, new MFEvent("Decorate Biome Event - Post", true));
-		localEvents.put(MFEventID.DECORATEBIOME_EVENT_PRE, new MFEvent("Decorate Biome Event - Pre", true));
-		localEvents.put(MFEventID.INITMAPGEN_EVENT, new MFEvent("Init Map Gen Event", false));
-		localEvents.put(MFEventID.INITNOISEGENS_EVENT, new MFEvent("Init Noise Gens Event", true));
-		localEvents.put(MFEventID.POPULATECHUNK_EVENT_POPULATE, new MFEvent("Populate Chunk Event - Populate", true));
-		localEvents.put(MFEventID.POPULATECHUNK_EVENT_POST, new MFEvent("Populate Chunk Event - Post", true));
-		localEvents.put(MFEventID.POPULATECHUNK_EVENT_PRE, new MFEvent("Populate Chunk Event - Pre", true));
-		localEvents.put(MFEventID.SAPLINGGROWTREEEVENT, new MFEvent("SaplingGrowTree Event", true));
-		localEvents.put(MFEventID.WORLDTYPEEVENT_BIOMESIZE, new MFEvent("World Type Event - Biome Size", true));
+				new MFEvent("TerrainGen: Chunk Provider Event - Replace Biome Blocks", true));
+		localEvents.put(MFEventID.DECORATEBIOME_EVENT_DECORATE, new MFEvent("TerrainGen: Decorate Biome Event - Decorate", true));
+		localEvents.put(MFEventID.DECORATEBIOME_EVENT_POST, new MFEvent("TerrainGen: Decorate Biome Event - Post", true));
+		localEvents.put(MFEventID.DECORATEBIOME_EVENT_PRE, new MFEvent("TerrainGen: Decorate Biome Event - Pre", true));
+		localEvents.put(MFEventID.INITMAPGEN_EVENT, new MFEvent("TerrainGen: Init Map Gen Event", false));
+		localEvents.put(MFEventID.INITNOISEGENS_EVENT, new MFEvent("TerrainGen: Init Noise Gens Event", true));
+		localEvents.put(MFEventID.POPULATECHUNK_EVENT_POPULATE, new MFEvent("TerrainGen: Populate Chunk Event - Populate", true));
+		localEvents.put(MFEventID.POPULATECHUNK_EVENT_POST, new MFEvent("TerrainGen: Populate Chunk Event - Post", true));
+		localEvents.put(MFEventID.POPULATECHUNK_EVENT_PRE, new MFEvent("TerrainGen: Populate Chunk Event - Pre", true));
+		localEvents.put(MFEventID.SAPLINGGROWTREEEVENT, new MFEvent("TerrainGen: SaplingGrowTree Event", true));
+		localEvents.put(MFEventID.WORLDTYPEEVENT_BIOMESIZE, new MFEvent("TerrainGen: World Type Event - Biome Size", true));
 		localEvents.put(MFEventID.WORLDTYPEEVENT_INITBIOMEGENS,
-				new MFEvent("World Type Event - Init Biome Gens", true));
+				new MFEvent("TerrainGen: World Type Event - Init Biome Gens", true));
 	}
 
 	/*

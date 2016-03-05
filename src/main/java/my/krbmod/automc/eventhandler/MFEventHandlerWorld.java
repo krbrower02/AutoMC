@@ -67,26 +67,26 @@ public class MFEventHandlerWorld {
 
 	public MFEventHandlerWorld() {
 		LogHelper.info(handlerName+" has been setup");
-		localEvents.put(MFEventId.BLOCKEVENT_BREAKEVENT, new MFEvent("Block Event - Break Event", true));
-		localEvents.put(MFEventId.BLOCKEVENT_HARVESTDROPSEVENT, new MFEvent("Block Event - Harves tDrops Event", true));
-		localEvents.put(MFEventId.BLOCKEVENT_MULTIPLACEEVENT, new MFEvent("Block Event - Multi Place Event", true));
-		localEvents.put(MFEventId.BLOCKEVENT_NEIGHBORNOTIFYEVENT, new MFEvent("Block Event - Neighbor Notify Event", false));
-		localEvents.put(MFEventId.BLOCKEVENT_PLACEEVENT, new MFEvent("Block Event - Place Event", true));
-		localEvents.put(MFEventId.CHUNKDATAEVENT_LOAD, new MFEvent("Chunk Data Event - Load", false));
-		localEvents.put(MFEventId.CHUNKDATAEVENT_SAVE, new MFEvent("Chunk Data Event - Save", false));
-		localEvents.put(MFEventId.CHUNKEVENT_LOAD, new MFEvent("Chunk Event - Load", false));
-		localEvents.put(MFEventId.CHUNKEVENT_UNLOAD, new MFEvent("Chunk Event - Unload", false));
-		localEvents.put(MFEventId.CHUNKWATCHEVENT_UNWATCH, new MFEvent("Chunk Watch Event - UnWatch", false));
-		localEvents.put(MFEventId.CHUNKWATCHEVENT_WATCH, new MFEvent("Chunk Watch Event - Watch", false));
-		localEvents.put(MFEventId.EXPLOSIONEVENT_DETONATE, new MFEvent("Explosion Event - Detonate", true));
-		localEvents.put(MFEventId.EXPLOSIONEVENT_START, new MFEvent("Explosion Event - Start", true));
-		localEvents.put(MFEventId.NOTEBLOCKEVENT_CHANGE, new MFEvent("NoteBloc kEvent - Change", true));
-		localEvents.put(MFEventId.NOTEBLOCKEVENT_PLAY, new MFEvent("NoteBlock Event - Play", true));
-		localEvents.put(MFEventId.WORLDEVENT_CREATESPAWNPOSITION, new MFEvent("World Event - CreateSpawn Position", true));
-		localEvents.put(MFEventId.WORLDEVENT_LOAD, new MFEvent("World Event - Load", false));
-		localEvents.put(MFEventId.WORLDEVENT_POTENTIALSPAWNS, new MFEvent("World Event - Potential Spawns", false));
-		localEvents.put(MFEventId.WORLDEVENT_SAVE, new MFEvent("WorldEvent - Save", true));
-		localEvents.put(MFEventId.WORLDEVENT_UNLOAD, new MFEvent("World Event - Unload", true));
+		localEvents.put(MFEventId.BLOCKEVENT_BREAKEVENT, new MFEvent("World: Block Event - Break Event", true));
+		localEvents.put(MFEventId.BLOCKEVENT_HARVESTDROPSEVENT, new MFEvent("World: Block Event - Harves tDrops Event", true));
+		localEvents.put(MFEventId.BLOCKEVENT_MULTIPLACEEVENT, new MFEvent("World: Block Event - Multi Place Event", true));
+		localEvents.put(MFEventId.BLOCKEVENT_NEIGHBORNOTIFYEVENT, new MFEvent("World: Block Event - Neighbor Notify Event", false));
+		localEvents.put(MFEventId.BLOCKEVENT_PLACEEVENT, new MFEvent("World: Block Event - Place Event", true));
+		localEvents.put(MFEventId.CHUNKDATAEVENT_LOAD, new MFEvent("World: Chunk Data Event - Load", false));
+		localEvents.put(MFEventId.CHUNKDATAEVENT_SAVE, new MFEvent("World: Chunk Data Event - Save", false));
+		localEvents.put(MFEventId.CHUNKEVENT_LOAD, new MFEvent("World: Chunk Event - Load", false));
+		localEvents.put(MFEventId.CHUNKEVENT_UNLOAD, new MFEvent("World: Chunk Event - Unload", false));
+		localEvents.put(MFEventId.CHUNKWATCHEVENT_UNWATCH, new MFEvent("World: Chunk Watch Event - UnWatch", false));
+		localEvents.put(MFEventId.CHUNKWATCHEVENT_WATCH, new MFEvent("World: Chunk Watch Event - Watch", false));
+		localEvents.put(MFEventId.EXPLOSIONEVENT_DETONATE, new MFEvent("World: Explosion Event - Detonate", true));
+		localEvents.put(MFEventId.EXPLOSIONEVENT_START, new MFEvent("World: Explosion Event - Start", true));
+		localEvents.put(MFEventId.NOTEBLOCKEVENT_CHANGE, new MFEvent("World: NoteBloc kEvent - Change", true));
+		localEvents.put(MFEventId.NOTEBLOCKEVENT_PLAY, new MFEvent("World: NoteBlock Event - Play", true));
+		localEvents.put(MFEventId.WORLDEVENT_CREATESPAWNPOSITION, new MFEvent("World: World Event - CreateSpawn Position", true));
+		localEvents.put(MFEventId.WORLDEVENT_LOAD, new MFEvent("World: World Event - Load", false));
+		localEvents.put(MFEventId.WORLDEVENT_POTENTIALSPAWNS, new MFEvent("World: World Event - Potential Spawns", false));
+		localEvents.put(MFEventId.WORLDEVENT_SAVE, new MFEvent("World: WorldEvent - Save", true));
+		localEvents.put(MFEventId.WORLDEVENT_UNLOAD, new MFEvent("World: World Event - Unload", true));
 
 	}
 

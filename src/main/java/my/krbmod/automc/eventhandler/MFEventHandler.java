@@ -40,14 +40,14 @@ public class MFEventHandler {
 
 	public MFEventHandler() {
 		LogHelper.info(handlerName+" has been setup");
-		localEvents.put(MFEventId.ANVILUPDATE_EVENT, new MFEvent("Anvil Update Event", false));
+		localEvents.put(MFEventId.ANVILUPDATE_EVENT, new MFEvent("Event: Anvil Update Event", false));
 		localEvents.put(MFEventId.ATTACHCAPABILITIES_EVENT_ENTITY,
-				new MFEvent("Attach Capabilities Event Entity", false));
-		localEvents.put(MFEventId.ATTACHCAPABILITIES_EVENT_ITEM, new MFEvent("Attach Capabilities Event Item", false));
+				new MFEvent("Event: Attach Capabilities Event Entity", false));
+		localEvents.put(MFEventId.ATTACHCAPABILITIES_EVENT_ITEM, new MFEvent("Event: Attach Capabilities Event Item", false));
 		localEvents.put(MFEventId.ATTACHCAPABILITIES_EVENT_TILEENTITY,
-				new MFEvent("Attach Capabilities Event Tile Entity", false));
-		localEvents.put(MFEventId.COMMAND_EVENT, new MFEvent("Command Event", true));
-		localEvents.put(MFEventId.SERVERCHAT_EVENT, new MFEvent("Server Chat Event", true));
+				new MFEvent("Event: Attach Capabilities Event Tile Entity", false));
+		localEvents.put(MFEventId.COMMAND_EVENT, new MFEvent("Event: Command Event", true));
+		localEvents.put(MFEventId.SERVERCHAT_EVENT, new MFEvent("Event: Server Chat Event", true));
 
 	}
 

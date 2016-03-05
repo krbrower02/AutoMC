@@ -19,27 +19,25 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class ModBlocks {
 
 	public static final ModBlock flag = new BlockFlag();
-	
+
 	private static ModBlock getRegisteredItem(String name) {
 		return (ModBlock) Block.blockRegistry.getObject(new ResourceLocation(name));
 	}
 
-	public static void init()
-	{
-		
+	public static void init() {
+
 		LogHelper.info("Registration of Blocks should be in Pre Initialization");
 
 		GameRegistry.registerBlock(flag, Names.Blocks.FLAG);
-	
-	}
-		
-	public static void registerRenders()
-	{
-		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-		
-    	renderItem.getItemModelMesher().register(Item.getItemFromBlock(flag), 0, new ModelResourceLocation(Reference.MOD_ID + ":" + ModBlocks.flag.getName(), "inventory"));
 
 	}
-	
+
+	public static void registerRenders() {
+		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
+
+		renderItem.getItemModelMesher().register(Item.getItemFromBlock(flag), 0,
+				new ModelResourceLocation(Reference.MOD_ID + ":" + ModBlocks.flag.getName(), "inventory"));
+
+	}
 
 }

@@ -38,15 +38,15 @@ public class MFEventHandlerEntity {
 
 	public MFEventHandlerEntity() {
 		LogHelper.info(handlerName+" has been setup");
-		localEvents.put(MFEventId.ENTITY_EVENT_CANUPDATE, new MFEvent("Entity Event - Can Update", false));
-		localEvents.put(MFEventId.ENTITY_EVENT_ENTERINGCHUNK, new MFEvent("Entity Event - Entering Chunk", false));
+		localEvents.put(MFEventId.ENTITY_EVENT_CANUPDATE, new MFEvent("Entity: Entity Event - Can Update", false));
+		localEvents.put(MFEventId.ENTITY_EVENT_ENTERINGCHUNK, new MFEvent("Entity: Entity Event - Entering Chunk", false));
 		localEvents.put(MFEventId.ENTITY_EVENT_ENTITYCONSTRUCTING,
-				new MFEvent("Entity Event - Entity Constructing", false));
-		localEvents.put(MFEventId.ENTITYJOINWORLD_EVENT, new MFEvent("Entity Join World Event", false));
-		localEvents.put(MFEventId.ENTITYMOUNT_EVENT, new MFEvent("Entity Mount Event", true));
-		localEvents.put(MFEventId.ENTITYSTRUCKBYLIGHTNING_EVENT, new MFEvent("Entity Struck By Lightning Event", true));
-		localEvents.put(MFEventId.ENTITYTRAVELTODIMENSION_EVENT, new MFEvent("Entity Travel To Dimension Event", true));
-		localEvents.put(MFEventId.PLAYSOUNDATENTITY_EVENT, new MFEvent("Play Sound At Entity Event", false));
+				new MFEvent("Entity: Entity Event - Entity Constructing", false));
+		localEvents.put(MFEventId.ENTITYJOINWORLD_EVENT, new MFEvent("Entity: Entity Join World Event", false));
+		localEvents.put(MFEventId.ENTITYMOUNT_EVENT, new MFEvent("Entity: Entity Mount Event", true));
+		localEvents.put(MFEventId.ENTITYSTRUCKBYLIGHTNING_EVENT, new MFEvent("Entity: Entity Struck By Lightning Event", true));
+		localEvents.put(MFEventId.ENTITYTRAVELTODIMENSION_EVENT, new MFEvent("Entity: Entity Travel To Dimension Event", true));
+		localEvents.put(MFEventId.PLAYSOUNDATENTITY_EVENT, new MFEvent("Entity: Play Sound At Entity Event", false));
 
 	}
 

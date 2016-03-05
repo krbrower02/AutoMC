@@ -35,10 +35,10 @@ public class MFEventHandlerEntityMinecart {
 
 	public MFEventHandlerEntityMinecart() {
 		LogHelper.info(handlerName+" has been setup");
-		localEvents.put(MFEventId.MINECARTCOLLISION_EVENT, new MFEvent("MinecartCollisionEvent", true));
-		localEvents.put(MFEventId.MINECART_EVENT, new MFEvent("MinecartEvent", false));
-		localEvents.put(MFEventId.MINECARTINTERACT_EVENT, new MFEvent("MinecartInteractEvent", true));
-		localEvents.put(MFEventId.MINECARTUPDATE_EVENT, new MFEvent("MinecartUpdateEvent", false));
+		localEvents.put(MFEventId.MINECARTCOLLISION_EVENT, new MFEvent("Entity.Minecart: MinecartCollisionEvent", true));
+		localEvents.put(MFEventId.MINECART_EVENT, new MFEvent("Entity.Minecart: MinecartEvent", false));
+		localEvents.put(MFEventId.MINECARTINTERACT_EVENT, new MFEvent("Entity.Minecart: MinecartInteractEvent", true));
+		localEvents.put(MFEventId.MINECARTUPDATE_EVENT, new MFEvent("Entity.Minecart: MinecartUpdateEvent", false));
 	}
 
 	/*

@@ -46,9 +46,9 @@ public class MFEventHandlerOreGen {
 
 	public MFEventHandlerOreGen() {
 		LogHelper.info(handlerName+" has been setup");
-		localEvents.put(MFEventID.OREGEN_EVENT_GENERATEMINABLE, new MFEvent("Ore Gen Event -  Generate Minable", true));
-		localEvents.put(MFEventID.OREGEN_EVENT_POST, new MFEvent("Ore Gen Event - Post", true));
-		localEvents.put(MFEventID.OREGEN_EVENT_PRE, new MFEvent("Ore Gen Event - Pre", true));
+		localEvents.put(MFEventID.OREGEN_EVENT_GENERATEMINABLE, new MFEvent("TerrainGen: Ore Gen Event - Generate Minable", true));
+		localEvents.put(MFEventID.OREGEN_EVENT_POST, new MFEvent("TerrainGen: Ore Gen Event - Post", true));
+		localEvents.put(MFEventID.OREGEN_EVENT_PRE, new MFEvent("TerrainGen: Ore Gen Event - Pre", true));
 		
 	}
 

@@ -34,9 +34,9 @@ public class MFEventHandlerBrewing {
 
 	public MFEventHandlerBrewing() {
 		LogHelper.info(handlerName+" has been setup");
-		//localEvents.put(MFEventId.POTIONBREW_EVENT, new MFEvent("Potion Brew Event", false));
-		localEvents.put(MFEventId.POTIONBREW_EVENT_POST, new MFEvent("Potion Brew Event - Post", true));
-		localEvents.put(MFEventId.POTIONBREW_EVENT_PRE, new MFEvent("Potion Brew Event - Pre", true));
+		//localEvents.put(MFEventId.POTIONBREW_EVENT, new MFEvent("Brewing: Potion Brew Event", false));
+		localEvents.put(MFEventId.POTIONBREW_EVENT_POST, new MFEvent("Brewing: Potion Brew Event - Post", true));
+		localEvents.put(MFEventId.POTIONBREW_EVENT_PRE, new MFEvent("Brewing: Potion Brew Event - Pre", true));
 	}
 
 	/*

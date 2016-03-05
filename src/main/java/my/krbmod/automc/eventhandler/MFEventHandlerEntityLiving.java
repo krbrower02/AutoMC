@@ -54,29 +54,29 @@ public class MFEventHandlerEntityLiving {
 
 	public MFEventHandlerEntityLiving() {
 		LogHelper.info(handlerName+" has been setup");
-		localEvents.put(MFEventId.ENDERTELEPORT_EVENT, new MFEvent("Ender Teleport Event", false));
-		localEvents.put(MFEventId.LIVINGATTACK_EVENT, new MFEvent("Living Attack Event", false));
-		localEvents.put(MFEventId.LIVINGDEATH_EVENT, new MFEvent("Living Death Event", true));
-		localEvents.put(MFEventId.LIVINGDROPS_EVENT, new MFEvent("Living Drops Event", true));
+		localEvents.put(MFEventId.ENDERTELEPORT_EVENT, new MFEvent("Entity.Living: Ender Teleport Event", false));
+		localEvents.put(MFEventId.LIVINGATTACK_EVENT, new MFEvent("Entity.Living: Living Attack Event", false));
+		localEvents.put(MFEventId.LIVINGDEATH_EVENT, new MFEvent("Entity.Living: Living Death Event", true));
+		localEvents.put(MFEventId.LIVINGDROPS_EVENT, new MFEvent("Entity.Living: Living Drops Event", true));
 		localEvents.put(MFEventId.LIVING_EVENT_LIVINGJUMP_EVENT,
-				new MFEvent("Living Event - Living Jump Event", false));
+				new MFEvent("Entity.Living: Living Event - Living Jump Event", false));
 		localEvents.put(MFEventId.LIVING_EVENT_LIVINGUPDATE_EVENT,
-				new MFEvent("Living Event - Living Update Event", false));
-		localEvents.put(MFEventId.LIVINGEXPERIENCEDROP_EVENT, new MFEvent("Living Experience Drop Event", true));
-		localEvents.put(MFEventId.LIVINGFALL_EVENT, new MFEvent("Living Fall Event", false));
-		localEvents.put(MFEventId.LIVINGHEAL_EVENT, new MFEvent("Living Heal Event", true));
-		localEvents.put(MFEventId.LIVINGHURT_EVENT, new MFEvent("Living Hurt Event", true));
-		localEvents.put(MFEventId.LIVINGPACKSIZE_EVENT, new MFEvent("Living Pack Size Event", false));
+				new MFEvent("Entity.Living: Living Event - Living Update Event", false));
+		localEvents.put(MFEventId.LIVINGEXPERIENCEDROP_EVENT, new MFEvent("Entity.Living: Living Experience Drop Event", true));
+		localEvents.put(MFEventId.LIVINGFALL_EVENT, new MFEvent("Entity.Living: Living Fall Event", false));
+		localEvents.put(MFEventId.LIVINGHEAL_EVENT, new MFEvent("Entity.Living: Living Heal Event", true));
+		localEvents.put(MFEventId.LIVINGHURT_EVENT, new MFEvent("Entity.Living: Living Hurt Event", true));
+		localEvents.put(MFEventId.LIVINGPACKSIZE_EVENT, new MFEvent("Entity.Living: Living Pack Size Event", false));
 		localEvents.put(MFEventId.LIVINGSETATTACKTARGET_EVENT,
-				new MFEvent("Living Set Attack Target Event", true));
+				new MFEvent("Entity.Living: Living Set Attack Target Event", true));
 		localEvents.put(MFEventId.LIVINGSPAWN_EVENT_ALLOWDESPAWN,
-				new MFEvent("Living Spawn Event - Allow Despawn", false));
+				new MFEvent("Entity.Living: Living Spawn Event - Allow Despawn", false));
 		localEvents.put(MFEventId.LIVINGSPAWN_EVENT_CHECKSPAWN,
-				new MFEvent("Living Spawn Event - Check Spawn", false));
+				new MFEvent("Entity.Living: Living Spawn Event - Check Spawn", false));
 		localEvents.put(MFEventId.LIVINGSPAWN_EVENT_SPECIALSPAWN,
-				new MFEvent("Living Spawn Event - Special Spawn", true));
+				new MFEvent("Entity.Living: Living Spawn Event - Special Spawn", true));
 		localEvents.put(MFEventId.ZOMBIE_EVENT_SUMMONAID_EVENT,
-				new MFEvent("Zombie Event - Summon Aid Event", true));
+				new MFEvent("Entity.Living: Zombie Event - Summon Aid Event", true));
 	}
 
 	/*

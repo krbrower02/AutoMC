@@ -22,7 +22,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemMapleLeaf extends ModItem {
 
-	
 	public ItemMapleLeaf() {
 		super();
 		this.itemName = Names.Items.MAPLE_LEAF;

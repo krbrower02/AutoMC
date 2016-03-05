@@ -17,7 +17,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ModItem extends Item {
-	
+
 	public String itemName = "Default";
 
 	public ModItem() {

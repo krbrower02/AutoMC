@@ -36,9 +36,9 @@ public class MFEventHandlerEntityItem {
 
 	public MFEventHandlerEntityItem() {
 		LogHelper.info(handlerName+" has been setup");
-		localEvents.put(MFEventId.ITEM_EVENT, new MFEvent("Item", false));
-		localEvents.put(MFEventId.ITEMEXPIRE_EVENT, new MFEvent("Item Expire", true));
-		localEvents.put(MFEventId.ITEMTOSS_EVENT, new MFEvent("Item Toss", true));
+		localEvents.put(MFEventId.ITEM_EVENT, new MFEvent("Entity.Item: Item", false));
+		localEvents.put(MFEventId.ITEMEXPIRE_EVENT, new MFEvent("Entity.Item: Item Expire", true));
+		localEvents.put(MFEventId.ITEMTOSS_EVENT, new MFEvent("Entity.Item: Item Toss", true));
 	}
 
 	/*
